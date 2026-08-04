@@ -1,8 +1,12 @@
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, FileText, ExternalLink } from "lucide-react";
 
 interface StepItem {
   title: string;
   desc?: string;
+  link?: {
+    label: string;
+    url: string;
+  };
 }
 
 interface Tier {
@@ -60,11 +64,19 @@ const tiersData: Tier[] = [
     items: [
       {
         title: "Certificate of Analysis (CoA) / GC-MS report",
-        desc: "Issued per batch.",
+        desc: "Issued per batch detailing physical-chemical specifications and purity.",
+        link: {
+          label: "View Sample Certificate of Analysis (COA)",
+          url: "https://drive.google.com/file/d/1j62MrUs-pVLiStSMGgXkK0s08EYEha6Y/view?usp=sharing",
+        },
       },
       {
         title: "Certificate of Origin",
-        desc: "Issued by Chamber of Commerce.",
+        desc: "Issued by Chamber of Commerce confirming origin from Tamil Nadu, South India.",
+        link: {
+          label: "View Sample Certificate of Origin",
+          url: "https://drive.google.com/file/d/1ilxK-41triF3QH80kNfiS95E80u5C0bj/view?usp=sharing",
+        },
       },
       {
         title: "Safety Data Sheet",
@@ -143,22 +155,78 @@ export function Quality() {
                 {tier.items.map((item, stepIdx) => (
                   <div
                     key={stepIdx}
-                    className="p-5 rounded-xl bg-background border border-border/80 shadow-xs hover:border-gold/60 transition-colors flex gap-4 items-start"
+                    className="p-5 rounded-xl bg-background border border-border/80 shadow-xs hover:border-gold/60 transition-colors flex gap-4 items-start flex-col justify-between"
                   >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-forest/10 font-mono text-xs font-semibold text-forest border border-forest/20 mt-0.5">
-                      {stepIdx + 1}
-                    </span>
-                    <div>
-                      <h4 className="font-serif text-lg text-foreground font-medium">{item.title}</h4>
-                      {item.desc && (
-                        <p className="text-xs text-muted-foreground leading-relaxed mt-1">{item.desc}</p>
-                      )}
+                    <div className="flex gap-4 items-start w-full">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-forest/10 font-mono text-xs font-semibold text-forest border border-forest/20 mt-0.5">
+                        {stepIdx + 1}
+                      </span>
+                      <div className="w-full">
+                        <h4 className="font-serif text-lg text-foreground font-medium">{item.title}</h4>
+                        {item.desc && (
+                          <p className="text-xs text-muted-foreground leading-relaxed mt-1">{item.desc}</p>
+                        )}
+                      </div>
                     </div>
+
+                    {item.link && (
+                      <div className="mt-3 pt-3 border-t border-border/60 w-full flex justify-start">
+                        <a
+                          href={item.link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-forest hover:text-gold transition-colors"
+                        >
+                          <FileText className="w-3.5 h-3.5" />
+                          <span>{item.link.label}</span>
+                          <ExternalLink className="w-3 h-3 opacity-70" />
+                        </a>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Sample Certificate Download / View Action Banner */}
+        <div className="mt-12 rounded-2xl border border-gold/40 bg-alabaster p-8 sm:p-10 shadow-md">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div>
+              <span className="text-[10px] tracking-[0.2em] uppercase text-gold font-semibold block mb-1">
+                Official Trade Documentation
+              </span>
+              <h3 className="font-serif text-2xl text-foreground font-normal">
+                Export Certificate Verification
+              </h3>
+              <p className="text-xs text-muted-foreground mt-1 max-w-xl font-light">
+                Direct access to KH International's official Certificate of Origin (COO) and Certificate of Analysis (COA) documentation for international trade partners.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 shrink-0">
+              <a
+                href="https://drive.google.com/file/d/1ilxK-41triF3QH80kNfiS95E80u5C0bj/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-gold bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-forest transition-colors rounded-xl shadow-xs"
+              >
+                <FileText className="w-4 h-4" />
+                Certificate of Origin
+                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+              </a>
+              <a
+                href="https://drive.google.com/file/d/1j62MrUs-pVLiStSMGgXkK0s08EYEha6Y/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-forest bg-forest px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-gold transition-colors rounded-xl shadow-xs"
+              >
+                <FileText className="w-4 h-4" />
+                Certificate of Analysis (COA)
+                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

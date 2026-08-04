@@ -33,12 +33,14 @@ export function Sustainability() {
                     <h3 className="font-serif text-2xl text-foreground">The Farming Partnership Program</h3>
                   </div>
                 </div>
-                <span className="text-xl font-serif font-bold text-forest bg-forest/10 px-3 py-1 rounded-md shrink-0">
-                  500+ Women
-                </span>
-                <span className="text-xl font-serif font-bold text-forest bg-forest/10 px-3 py-1 rounded-md shrink-0">
-                  100+ Acres
-                </span>
+                <div className="flex space-x-2 p-2 text-md width-full">
+                  <span className="font-serif font-bold text-forest bg-forest/10 px-3 py-1 rounded-md shrink-0">
+                    500+ Women
+                  </span>
+                  <span className="font-serif font-bold text-forest bg-forest/10 px-3 py-1 rounded-md shrink-0">
+                    100+ Acres
+                  </span>
+                </div>
               </div>
 
               <p className="text-sm leading-relaxed text-muted-foreground mb-6">
@@ -60,7 +62,7 @@ export function Sustainability() {
                     <h3 className="font-serif text-2xl text-foreground">The Vetriver Craft Program</h3>
                   </div>
                 </div>
-                <span className="text-xl font-serif font-bold text-gold bg-gold/10 px-3 py-1 rounded-md shrink-0">
+                <span className="text-md font-serif font-bold text-gold bg-gold/10 px-3 py-1 rounded-md shrink-0">
                   400+ Women
                 </span>
               </div>

@@ -50,7 +50,18 @@ export function Product({ onOpenSampleModal }: ProductProps) {
             </p>
 
             <p className="mt-6 text-base leading-relaxed text-muted-foreground font-light">
-              An earthy, woody, smoky-sweet base note prized in fine fragrance, and a foundational ingredient across cosmetics, aromatherapy, and traditional Siddha and Ayurvedic medicine.            </p>
+              An earthy, woody, smoky-sweet base note prized in fine fragrance, and a foundational ingredient across cosmetics, aromatherapy, and traditional Siddha and Ayurvedic medicine.
+            </p>
+
+            {/* Etymology & Roots Paragraph */}
+            <div className="mt-6 rounded-xl border-l-4 border-gold bg-alabaster p-4.5 border-y border-r border-border/60 shadow-xs">
+              <span className="text-[10px] tracking-[0.2em] font-semibold text-gold uppercase block mb-1">
+                Etymology & Tamil Roots
+              </span>
+              <p className="text-xs sm:text-sm leading-relaxed text-foreground/90 font-light">
+                The name <strong className="font-semibold text-forest font-serif">"Vetriver"</strong> (or <em>Vetiver</em>) derives directly from the native Tamil language words <strong className="font-semibold text-forest">Vettiveru (வெட்டிவேர்)</strong> — synthesized from <em>"Vetti"</em> (dug up/cut) and <em>"Veru"</em> (root). Born from the soil of Tamil Nadu, South India, this Tamil origin term has been embraced globally across French perfumery, international trade, and essential oil terminology worldwide.
+              </p>
+            </div>
           </div>
 
           {/* Right Column Image */}
