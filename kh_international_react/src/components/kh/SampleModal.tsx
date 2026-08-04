@@ -126,24 +126,24 @@ export function SampleModal({ isOpen, onClose, defaultType = "sample" }: SampleM
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
-                    Full Name *
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1 font-semibold">
+                    Name / Company Name *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Jean Dupont"
+                    placeholder="e.g. Marie Laurent / Parfums SA"
                     className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm focus:border-gold focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
-                    Company Name *
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1 font-semibold">
+                    Country *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Maison de Fragrance SA"
+                    placeholder="e.g. France / Canada / USA"
                     className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm focus:border-gold focus:outline-none"
                   />
                 </div>
@@ -151,69 +151,35 @@ export function SampleModal({ isOpen, onClose, defaultType = "sample" }: SampleM
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
-                    Corporate Email *
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1 font-semibold">
+                    Product of Interest
                   </label>
                   <input
-                    type="email"
-                    required
-                    placeholder="purchasing@company.com"
+                    type="text"
+                    placeholder="e.g. Bulk Vetriver Oil / 100g Sample"
                     className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm focus:border-gold focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
-                    Country / Market *
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1 font-semibold">
+                    Estimated Order Volume
                   </label>
-                  <select
-                    required
+                  <input
+                    type="text"
+                    placeholder="e.g. 25 kg Drum / 5 kg Trial"
                     className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm focus:border-gold focus:outline-none"
-                  >
-                    <option value="France">France</option>
-                    <option value="Canada">Canada</option>
-                    <option value="EU - Other">Europe / EU Other</option>
-                    <option value="India">India</option>
-                    <option value="USA">USA / North America</option>
-                    <option value="Other">Other Global Location</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
-                    Target Volume Requirement
-                  </label>
-                  <select className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm focus:border-gold focus:outline-none">
-                    <option value="Sample Pack">Sample Pack (100g vial)</option>
-                    <option value="5 kg Trial Drum">5 kg Trial Aluminium Drum</option>
-                    <option value="25 kg Standard Drum">25 kg Standard HDPE/UN Drum</option>
-                    <option value="180 kg ISO Drum">180 kg ISO Steel Drum</option>
-                    <option value="1+ Tonne Annual Contract">1+ Tonne Annual Contract</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
-                    Primary Application
-                  </label>
-                  <select className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm focus:border-gold focus:outline-none">
-                    <option value="Fine Fragrance">Fine Fragrance & Perfumery</option>
-                    <option value="Cosmetics & Skincare">Cosmetics & Skincare Formulation</option>
-                    <option value="Aromatherapy">Aromatherapy & Wellness</option>
-                    <option value="Siddha & Ayurveda">Siddha & Traditional Medicine</option>
-                    <option value="Beverages">Functional Beverages</option>
-                  </select>
+                  />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
-                  Specific Requirements / Lab Notes
+                <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1 font-semibold">
+                  Message
                 </label>
-                <textarea
-                  rows={3}
-                  placeholder="Mention any specific GC-MS parameters, optical rotation range, REACH compliance needs, or delivery timelines."
-                  className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm focus:border-gold focus:outline-none resize-none"
+                <input
+                  type="text"
+                  placeholder="e.g. Target delivery date, Incoterms, or specifications"
+                  className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm focus:border-gold focus:outline-none"
                 />
               </div>
 
