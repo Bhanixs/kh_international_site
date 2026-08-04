@@ -42,7 +42,7 @@ export function Sustainability() {
               </div>
 
               <p className="text-sm leading-relaxed text-muted-foreground mb-6">
-                Every litre of KH International vetiver oil is connected to a farmer partnership, not an anonymous commodity purchase. We provide our partner farmers with quality seedlings, soil testing, and cultivation guidance — and in return, we secure a stable, quality-controlled supply of mature root, harvested at the right time for optimal oil yield. Today, more than 500 women farm vetiver across more than 100 acres of partner land under this program — earning stable income from a crop that restores the soil it grows in, rather than depleting it.
+                Every litre of KH International vetriver oil is connected to a farmer partnership, not an anonymous commodity purchase. We provide our partner farmers with quality seedlings, soil testing, and cultivation guidance — and in return, we secure a stable, quality-controlled supply of mature root, harvested at the right time for optimal oil yield. Today, more than 500 women farm vetriver across more than 100 acres of partner land under this program — earning stable income from a crop that restores the soil it grows in, rather than depleting it.
               </p>
             </div>
           </div>
@@ -57,7 +57,7 @@ export function Sustainability() {
                   </div>
                   <div>
                     <span className="text-[10px] tracking-[0.2em] text-gold uppercase font-semibold block">Program 02</span>
-                    <h3 className="font-serif text-2xl text-foreground">The Vetiver Craft Program</h3>
+                    <h3 className="font-serif text-2xl text-foreground">The Vetriver Craft Program</h3>
                   </div>
                 </div>
                 <span className="text-xl font-serif font-bold text-gold bg-gold/10 px-3 py-1 rounded-md shrink-0">
@@ -66,7 +66,7 @@ export function Sustainability() {
               </div>
 
               <p className="text-sm leading-relaxed text-muted-foreground mb-6">
-                Not every part of the harvest goes to distillation. Alongside oil production, we run a parallel livelihood program built around traditional vetiver root craft — more than 400 women artisans handweaving root into mats, screens, and fragrance products using techniques passed down for generations. This program gives artisan families income that doesn't depend on the oil market alone, and keeps a genuinely traditional craft economically alive rather than letting it fade out.
+                Not every part of the harvest goes to distillation. Alongside oil production, we run a parallel livelihood program built around traditional vetriver root craft — more than 400 women artisans handweaving root into mats, screens, and fragrance products using techniques passed down for generations. This program gives artisan families income that doesn't depend on the oil market alone, and keeps a genuinely traditional craft economically alive rather than letting it fade out.
               </p>
             </div>
           </div>
@@ -86,7 +86,7 @@ export function Sustainability() {
               <div className="rounded-xl overflow-hidden border border-white/20 shadow-xl">
                 <img
                   src={img}
-                  alt="Farming community harvesting vetiver at golden hour in South India"
+                  alt="Farming community harvesting vetriver at golden hour in South India"
                   width={1200}
                   height={1400}
                   className="h-[260px] w-full object-cover"
@@ -106,7 +106,7 @@ export function Sustainability() {
               >
                 <img
                   src={photo}
-                  alt={`Vetiver farming & artisan craft highlight ${idx + 1}`}
+                  alt={`Vetriver farming & artisan craft highlight ${idx + 1}`}
                   className="w-full h-full object-cover object-center"
                 />
               </div>

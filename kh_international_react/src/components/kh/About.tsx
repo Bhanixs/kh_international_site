@@ -10,7 +10,7 @@ const stats = [
   {
     value: "500+",
     label: "Women in Farming",
-    detail: "Directly empowered in regenerative vetiver cultivation",
+    detail: "Directly empowered in regenerative vetriver cultivation",
   },
   {
     value: "100+",
@@ -34,7 +34,7 @@ export function About() {
             <div className="relative rounded-2xl overflow-hidden border border-border/80 shadow-2xl bg-forest">
               <img
                 src={aboutImg}
-                alt="Hands cradling freshly harvested vetiver roots in Villupuram, Tamil Nadu"
+                alt="Hands cradling freshly harvested vetriver roots in Villupuram, Tamil Nadu"
                 width={1200}
                 height={1400}
                 loading="lazy"
@@ -46,7 +46,7 @@ export function About() {
                 </span>
                 <h3 className="font-serif text-2xl">Rooted in Purpose & Regenerative Agriculture</h3>
                 <p className="text-xs text-white/80 mt-1 max-w-md">
-                  Organizing farming communities around low-water vetiver to build resilient livelihoods and prevent soil erosion.
+                  Organizing farming communities around low-water vetriver to build resilient livelihoods and prevent soil erosion.
                 </p>
               </div>
             </div>
@@ -63,13 +63,13 @@ export function About() {
 
             <div className="mt-6 space-y-6 text-base leading-relaxed text-muted-foreground font-light">
               <p>
-                Founded in 2012 in Villupuram, Tamil Nadu, KH International began with a simple conviction: that vetiver — a hardy, unglamorous grass most farmers overlooked — could become the foundation of a fairer, more resilient rural economy. Vetiver asks for almost nothing: little water, no chemical dependency, and a root system that holds soil together where erosion would otherwise win. What it gives back, when a farming community is organized around it properly, is a great deal.
+                Founded in 2012 in Villupuram, Tamil Nadu, KH International began with a simple conviction: that vetriver — a hardy, unglamorous grass most farmers overlooked — could become the foundation of a fairer, more resilient rural economy. Vetriver asks for almost nothing: little water, no chemical dependency, and a root system that holds soil together where erosion would otherwise win. What it gives back, when a farming community is organized around it properly, is a great deal.
               </p>
               <p>
-                What started as a partnership with a handful of local farming families has grown, over more than a decade, into a structured livelihood network. Today, more than 500 women are directly engaged in vetiver farming across our partner network, cultivating over 100 acres of farmland using regenerative, low-water practices. Alongside that farming partnership, we built a second, parallel program around traditional vetiver root craft — more than 400 women artisans handweaving mats, screens, and fragrance products from surplus root, keeping a centuries-old craft tradition alive while creating income that doesn't depend on any single harvest.
+                What started as a partnership with a handful of local farming families has grown, over more than a decade, into a structured livelihood network. Today, more than 500 women are directly engaged in vetriver farming across our partner network, cultivating over 100 acres of farmland using regenerative, low-water practices. Alongside that farming partnership, we built a second, parallel program around traditional vetriver root craft — more than 400 women artisans handweaving mats, screens, and fragrance products from surplus root, keeping a centuries-old craft tradition alive while creating income that doesn't depend on any single harvest.
               </p>
               <p className="font-normal text-foreground">
-                From that foundation, KH International now distills export-grade vetiver oil for global perfumery, cosmetics, and wellness markets — currently supplying Canada, and building toward France and the wider European market. Every litre we export carries the same story: a rural economy built on women's livelihoods and regenerative farming, not extracted from it.
+                From that foundation, KH International now distills export-grade vetriver oil for global perfumery, cosmetics, and wellness markets — currently supplying Canada, and building toward France and the wider European market. Every litre we export carries the same story: a rural economy built on women's livelihoods and regenerative farming, not extracted from it.
               </p>
             </div>
           </div>

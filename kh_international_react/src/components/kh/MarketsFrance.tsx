@@ -90,8 +90,8 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
             <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground font-light">
               <p>
                 {lang === "en"
-                  ? "KH International currently supplies vetiver oil to the Canadian market — a live, working export operation, not a first-time attempt at international trade. We're now building the same long-term relationships with trade houses, buying houses, and perfumery ingredient distributors in France and across Europe."
-                  : "KH International fournit actuellement de l'huile essentielle de vétiver au marché canadien — une opération d'exportation active et éprouvée. Nous développons aujourd'hui les mêmes partenariats à long terme avec les maisons de négoce et les distributeurs d'ingrédients de parfumerie en France et en Europe."}
+                  ? "KH International currently supplies vetriver oil to the Canadian market — a live, working export operation, not a first-time attempt at international trade. We're now building the same long-term relationships with trade houses, buying houses, and perfumery ingredient distributors in France and across Europe."
+                  : "KH International fournit actuellement de l'huile essentielle de vétriver au marché canadien — une opération d'exportation active et éprouvée. Nous développons aujourd'hui les mêmes partenariats à long terme avec les maisons de négoce et les distributeurs d'ingrédients de parfumerie en France et en Europe."}
               </p>
               <p className="font-normal text-foreground">
                 {lang === "en"

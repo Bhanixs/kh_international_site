@@ -16,7 +16,7 @@ export function Footer() {
                 KH International
               </h3>
               <p className="mt-3 text-xs text-white/80 max-w-md leading-relaxed">
-                Vertically integrated vetiver oil producer from Villupuram, Tamil Nadu, South India — supporting 900+ women's livelihoods across regenerative farming and handwoven root craft.
+                Vertically integrated vetriver oil producer from Villupuram, Tamil Nadu, South India — supporting 900+ women's livelihoods across regenerative farming and handwoven root craft.
               </p>
             </div>
           </div>
@@ -29,7 +29,7 @@ export function Footer() {
             <ul className="space-y-2.5 text-white/80">
               <li><a href="#home" className="hover:text-gold transition-colors">Page 1 — Home</a></li>
               <li><a href="#about" className="hover:text-gold transition-colors">Page 2 — Our Story</a></li>
-              <li><a href="#product" className="hover:text-gold transition-colors">Page 3 — Vetiver Oil</a></li>
+              <li><a href="#product" className="hover:text-gold transition-colors">Page 3 — Vetriver Oil</a></li>
               <li><a href="#why-kh" className="hover:text-gold transition-colors">Page 4 — Why India</a></li>
               <li><a href="#sustainability" className="hover:text-gold transition-colors">Page 5 — Sustainability</a></li>
               <li><a href="#markets" className="hover:text-gold transition-colors">Page 6 — Global Trade (France)</a></li>

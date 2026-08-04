@@ -9,7 +9,7 @@ const trustItems = [
   {
     icon: Award,
     title: "Founded in 2012",
-    detail: "Over a decade building rural livelihoods through vetiver",
+    detail: "Over a decade building rural livelihoods through vetriver",
   },
   {
     icon: Globe,
@@ -42,11 +42,11 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
           </div>
 
           <h1 className="font-serif text-4xl leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[4.5rem] font-normal">
-            India's Vetiver, Grown with Purpose. Distilled for the World.
+            India's Vetriver, Grown with Purpose. Distilled for the World.
           </h1>
 
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground font-light">
-            KH International is a vertically integrated vetiver oil producer from Tamil Nadu, South India — from farmer partnership and cultivation through to steam-distilled oil, ready for perfumery, cosmetics, and wellness markets worldwide.
+            KH International is a vertically integrated vetriver oil producer from Tamil Nadu, South India — from farmer partnership and cultivation through to steam-distilled oil, ready for perfumery, cosmetics, and wellness markets worldwide.
           </p>
 
           {/* Primary Call to Action Buttons */}
@@ -72,7 +72,7 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
           <div className="relative rounded-2xl overflow-hidden border border-border/80 shadow-2xl">
             <img
               src={heroImg}
-              alt="Golden steam-distilled vetiver essential oil droplet with botanical root detail"
+              alt="Golden steam-distilled vetriver essential oil droplet with botanical root detail"
               width={1200}
               height={1500}
               className="h-[480px] w-full object-cover lg:h-[580px] transition-transform duration-700 hover:scale-105"
@@ -82,7 +82,7 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
                 Pure Steam Distillation
               </span>
               <h3 className="font-serif text-2xl">Chrysopogon zizanioides</h3>
-              <p className="text-xs text-white/80 mt-1">100% Pure & Natural Vetiver Essential Oil · Tamil Nadu Origin</p>
+              <p className="text-xs text-white/80 mt-1">100% Pure & Natural Vetriver Essential Oil · Tamil Nadu Origin</p>
             </div>
           </div>
         </div>

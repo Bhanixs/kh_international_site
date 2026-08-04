@@ -39,10 +39,10 @@ export function Product({ onOpenSampleModal }: ProductProps) {
               The Product · Page 3
             </span>
             <h2 className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl font-normal">
-              Our Vetiver Oil
+              Our Vetriver Oil
             </h2>
             <p className="mt-4 text-xs font-mono text-forest uppercase tracking-widest bg-forest/10 px-3 py-1.5 rounded-md inline-block">
-              Botanical Name: Chrysopogon zizanioides (syn. Vetiveria zizanioides)
+              Botanical Name: Chrysopogon zizanioides (syn. Vetriveria zizanioides)
             </p>
 
             <p className="mt-4 text-xs font-mono text-forest uppercase tracking-widest bg-forest/10 px-3 py-1.5 rounded-md inline-block">
@@ -58,7 +58,7 @@ export function Product({ onOpenSampleModal }: ProductProps) {
             <div className="relative rounded-2xl overflow-hidden border border-border/80 shadow-2xl">
               <img
                 src={productImg}
-                alt="Vetiver roots with amber essential oil vial in natural light"
+                alt="Vetriver roots with amber essential oil vial in natural light"
                 width={800}
                 height={800}
                 loading="lazy"

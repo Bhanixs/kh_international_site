@@ -9,7 +9,7 @@ interface NavProps {
 const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "Story" },
-  { href: "#product", label: "Vetiver Oil" },
+  { href: "#product", label: "Vetriver Oil" },
   { href: "#why-kh", label: "Why KH" },
   { href: "#sustainability", label: "Sustainability" },
   { href: "#markets", label: "Global Trade" },

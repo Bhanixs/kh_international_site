@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { KHLanding } from "@/components/kh/KHLanding";
 
-const TITLE = "KH International — Premium Vetiver Oil for Fragrance & Beauty";
+const TITLE = "KH International — Premium Vetriver Oil for Fragrance & Beauty";
 const DESC =
-  "KH International supplies premium vetiver oil to B2B buyers — fragrance houses, perfume manufacturers, devotional and beauty brands across India, France, and global markets.";
+  "KH International supplies premium vetriver oil to B2B buyers — fragrance houses, perfume manufacturers, devotional and beauty brands across India, France, and global markets.";
 
 export const Route = createFileRoute("/")({
   head: () => ({

@@ -31,7 +31,7 @@ const tiersData: Tier[] = [
       },
       {
         title: "FSSAI License/Registration",
-        desc: "Required if any product or claim touches food/ingestible use (relevant given vetiver's traditional use in cooling beverages).",
+        desc: "Required if any product or claim touches food/ingestible use (relevant given vetriver's traditional use in cooling beverages).",
       },
     ],
   },

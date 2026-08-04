@@ -54,7 +54,7 @@ export function SampleModal({ isOpen, onClose, defaultType = "sample" }: SampleM
             <div className="mt-6 flex flex-wrap gap-3 justify-center">
               <button
                 onClick={() => {
-                  toast.info("Downloading KH_Vetiver_Oil_GCMS_Spec_Sheet.pdf");
+                  toast.info("Downloading KH_Vetriver_Oil_GCMS_Spec_Sheet.pdf");
                 }}
                 className="inline-flex items-center gap-2 border border-gold bg-gold/10 px-5 py-2.5 text-xs font-medium uppercase tracking-widest text-gold hover:bg-gold hover:text-white transition-colors"
               >
@@ -79,7 +79,7 @@ export function SampleModal({ isOpen, onClose, defaultType = "sample" }: SampleM
                   ? "Download Specification & GC-MS Report"
                   : requestType === "partner"
                   ? "Become a Global Trade Partner"
-                  : "Request Export-Grade Vetiver Oil Sample"}
+                  : "Request Export-Grade Vetriver Oil Sample"}
               </h3>
               <p className="text-xs text-muted-foreground mt-1">
                 Direct from Villupuram, Tamil Nadu to your lab or formulation facility.

@@ -32,7 +32,7 @@ export function KHLanding() {
         {/* Page 2 — About KH International / Our Story */}
         <About />
 
-        {/* Page 3 — Our Vetiver Oil */}
+        {/* Page 3 — Our Vetriver Oil */}
         <Product onOpenSampleModal={handleOpenModal} />
 
         {/* Page 4 — Why India, Why KH International */}

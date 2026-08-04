@@ -19,7 +19,7 @@ export function FarmersSection() {
             </h2>
             <p className="mt-4 text-base text-muted-foreground leading-relaxed">
               {lang === "en"
-                ? "Empowering local agriculture through low-water vetiver farming and handwoven root craft. Building stable, dignified income across Villupuram district."
+                ? "Empowering local agriculture through low-water vetriver farming and handwoven root craft. Building stable, dignified income across Villupuram district."
                 : "குறைந்த நீர் தேவையில் அதிக வருமானம் தரும் வெட்டிவேர் சாகுபடி மற்றும் பாரம்பரிய கைவினைத் தொழில் பயிற்சி. விழுப்புரம் மாவட்ட விவசாயிகளின் வாழ்வாதார மேம்பாடு."}
             </p>
           </div>
@@ -102,7 +102,7 @@ export function FarmersSection() {
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
               {lang === "en"
-                ? "Over 400 women trained in handweaving vetiver root mats, curtains, and aromatic wellness products."
+                ? "Over 400 women trained in handweaving vetriver root mats, curtains, and aromatic wellness products."
                 : "400-க்கும் மேற்பட்ட மகளிருக்கு வெட்டிவேர் பாய்கள், திரைச்சீலைகள் நெய்யும் பயிற்சி மற்றும் வருமான வாய்ப்பு."}
             </p>
           </div>
@@ -117,7 +117,7 @@ export function FarmersSection() {
             </div>
             <h4 className="font-serif text-2xl">
               {lang === "en"
-                ? "Want to cultivate Vetiver on your land in Tamil Nadu?"
+                ? "Want to cultivate Vetriver on your land in Tamil Nadu?"
                 : "உங்கள் நிலத்தில் வெட்டிவேர் பயிரிட விரும்புகிறீர்களா?"}
             </h4>
             <p className="text-xs text-white/80 mt-1 max-w-xl">

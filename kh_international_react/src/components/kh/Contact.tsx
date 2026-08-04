@@ -169,7 +169,7 @@ export function Contact() {
                       <input
                         name="product"
                         type="text"
-                        placeholder="e.g. Bulk Vetiver Oil / 100g Sample"
+                        placeholder="e.g. Bulk Vetriver Oil / 100g Sample"
                         className="w-full bg-alabaster/60 border border-border/80 rounded-xl px-4 py-3 text-sm text-foreground focus:border-gold focus:ring-1 focus:ring-gold/30 focus:outline-none transition-all placeholder:text-muted-foreground/50"
                       />
                     </div>

@@ -27,7 +27,7 @@ export function WhyKH() {
               Supply security, not just an alternative source
             </h3>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Global perfumery has depended on a small number of source regions for vetiver — principally Haiti, Java, and Réunion — and that concentration has become a real vulnerability. Haiti's political and economic instability in particular has repeatedly disrupted supply in recent years. KH International offers what the market currently lacks: a scalable, traceable, quality-consistent source outside that fragile supply concentration.             </p>
+              Global perfumery has depended on a small number of source regions for vetriver — principally Haiti, Java, and Réunion — and that concentration has become a real vulnerability. Haiti's political and economic instability in particular has repeatedly disrupted supply in recent years. KH International offers what the market currently lacks: a scalable, traceable, quality-consistent source outside that fragile supply concentration.             </p>
           </div>
 
           {/* Pillar 2 */}
@@ -42,7 +42,7 @@ export function WhyKH() {
               Regenerative by nature, not by marketing claim
             </h3>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Vetiver is one of the few crops where sustainability and commercial quality point in the same direction. It requires minimal irrigation, tolerates drought, and its root system actively prevents soil erosion — every acre under our cultivation is land that improves rather than depletes while it produces.            </p>
+              Vetriver is one of the few crops where sustainability and commercial quality point in the same direction. It requires minimal irrigation, tolerates drought, and its root system actively prevents soil erosion — every acre under our cultivation is land that improves rather than depletes while it produces.            </p>
           </div>
 
           {/* Pillar 3 */}
