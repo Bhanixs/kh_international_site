@@ -18,8 +18,13 @@ const trustItems = [
   },
   {
     icon: Users,
-    title: "900+ Women Empowered",
-    detail: "Direct livelihoods across partner farming & root craft",
+    title: "500+",
+    detail: "Women empowered directly in vetiver farming",
+  },
+  {
+    icon: Users,
+    title: "400+",
+    detail: "Women empowered in vetiver craft production",
   },
   {
     icon: ShieldCheck,
@@ -112,53 +117,6 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
             })}
           </div>
         </div>
-      </div>
-      <div className="flex items-center justify-center mt-4 mb-6">
-        <h2 className="border border-forest/40 bg-gold/10 p-4 rounded-lg text-gold font-serif text-xl font-semibold">
-          Our Certifications & Reports
-        </h2>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 shrink-0 items-center justify-center max-w-2xl mx-auto w-full px-4">
-        <a
-          href="https://drive.google.com/file/d/1ilxK-41triF3QH80kNfiS95E80u5C0bj/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 border border-gold bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-forest transition-colors rounded-xl shadow-xs w-full text-center"
-        >
-          <FileText className="w-4 h-4 shrink-0" />
-          <span>Certificate of Origin</span>
-          <ExternalLink className="w-3.5 h-3.5 opacity-80 shrink-0" />
-        </a>
-        <a
-          href="https://drive.google.com/file/d/1j62MrUs-pVLiStSMGgXkK0s08EYEha6Y/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 border border-forest bg-forest px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-gold transition-colors rounded-xl shadow-xs w-full text-center"
-        >
-          <FileText className="w-4 h-4 shrink-0" />
-          <span>Certificate of Analysis (COA)</span>
-          <ExternalLink className="w-3.5 h-3.5 opacity-80 shrink-0" />
-        </a>
-        <a
-          href="https://drive.google.com/file/d/15jOhlfgu7SD-xt1KAB7Ke69h-alkEw70/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 border border-gold bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-forest transition-colors rounded-xl shadow-xs w-full text-center"
-        >
-          <FileText className="w-4 h-4 shrink-0" />
-          <span>Test Report</span>
-          <ExternalLink className="w-3.5 h-3.5 opacity-80 shrink-0" />
-        </a>
-        <a
-          href="https://drive.google.com/file/d/139cHzgOttmjw6F1XoGpqq6CCjkLyiQaQ/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 border border-forest bg-forest px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-gold transition-colors rounded-xl shadow-xs w-full text-center"
-        >
-          <FileText className="w-4 h-4 shrink-0" />
-          <span>MSDS</span>
-          <ExternalLink className="w-3.5 h-3.5 opacity-80 shrink-0" />
-        </a>
       </div>
     </section>
   );

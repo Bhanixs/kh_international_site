@@ -51,6 +51,10 @@ const tiersData: Tier[] = [
       {
         title: "SDS (Safety Data Sheet) in GHS/CLP format",
         desc: "The EU-compliant format buyers will expect, distinct from a basic MSDS.",
+        link: {
+          label: "View MSDS",
+          url: "https://drive.google.com/file/d/139cHzgOttmjw6F1XoGpqq6CCjkLyiQaQ/view?usp=sharing",
+        },
       },
       {
         title: "Canada-specific compliance",
@@ -66,7 +70,7 @@ const tiersData: Tier[] = [
         title: "Certificate of Analysis (CoA) / GC-MS report",
         desc: "Issued per batch detailing physical-chemical specifications and purity.",
         link: {
-          label: "View Sample Certificate of Analysis (COA)",
+          label: "View Certificate of Analysis (COA)",
           url: "https://drive.google.com/file/d/1j62MrUs-pVLiStSMGgXkK0s08EYEha6Y/view?usp=sharing",
         },
       },
@@ -74,7 +78,7 @@ const tiersData: Tier[] = [
         title: "Certificate of Origin",
         desc: "Issued by Chamber of Commerce confirming origin from Tamil Nadu, South India.",
         link: {
-          label: "View Sample Certificate of Origin",
+          label: "View Certificate of Origin",
           url: "https://drive.google.com/file/d/1ilxK-41triF3QH80kNfiS95E80u5C0bj/view?usp=sharing",
         },
       },
