@@ -189,45 +189,6 @@ export function Quality() {
             </div>
           ))}
         </div>
-
-        {/* Sample Certificate Download / View Action Banner */}
-        <div className="mt-12 rounded-2xl border border-gold/40 bg-alabaster p-8 sm:p-10 shadow-md">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div>
-              <span className="text-[10px] tracking-[0.2em] uppercase text-gold font-semibold block mb-1">
-                Official Trade Documentation
-              </span>
-              <h3 className="font-serif text-2xl text-foreground font-normal">
-                Export Certificate Verification
-              </h3>
-              <p className="text-xs text-muted-foreground mt-1 max-w-xl font-light">
-                Direct access to KH International's official Certificate of Origin (COO) and Certificate of Analysis (COA) documentation for international trade partners.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3 shrink-0">
-              <a
-                href="https://drive.google.com/file/d/1ilxK-41triF3QH80kNfiS95E80u5C0bj/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-gold bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-forest transition-colors rounded-xl shadow-xs"
-              >
-                <FileText className="w-4 h-4" />
-                Certificate of Origin
-                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
-              </a>
-              <a
-                href="https://drive.google.com/file/d/1j62MrUs-pVLiStSMGgXkK0s08EYEha6Y/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-forest bg-forest px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-gold transition-colors rounded-xl shadow-xs"
-              >
-                <FileText className="w-4 h-4" />
-                Certificate of Analysis (COA)
-                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

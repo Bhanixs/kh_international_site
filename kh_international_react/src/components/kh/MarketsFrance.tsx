@@ -1,6 +1,6 @@
 import { useState } from "react";
 import img from "@/assets/market-france.jpeg";
-import { Globe2, FileCheck2, Truck, ShieldCheck, ArrowRight, Languages } from "lucide-react";
+import { Globe2, FileCheck2, Truck, ShieldCheck, ArrowRight, Languages, FileText, ExternalLink } from "lucide-react";
 
 interface MarketsFranceProps {
   onOpenSampleModal?: (type?: "sample" | "partner" | "gcms") => void;
@@ -119,6 +119,19 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
             ))}
           </div>
         </div>
+        {/* Environmental Monitoring Service Button */}
+        <div className="flex flex-wrap gap-3 shrink-0 items-center justify-center mt-16">
+              <a
+                href="https://drive.google.com/file/d/1pqmkze-rB-n4JEUYzAeTxVPALdgQMGyT/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-forest bg-forest px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-gold transition-colors rounded-xl shadow-xs"
+              >
+                <FileText className="w-4 h-4" />
+                 Environmental Monitoring Service
+                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+              </a>
+            </div>
       </div>
     </section>
   );

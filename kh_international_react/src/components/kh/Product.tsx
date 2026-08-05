@@ -59,7 +59,7 @@ export function Product({ onOpenSampleModal }: ProductProps) {
                 Etymology & Tamil Roots
               </span>
               <p className="text-xs sm:text-sm leading-relaxed text-foreground/90 font-light">
-                The name <strong className="font-semibold text-forest font-serif">"Vetriver"</strong> (or <em>Vetiver</em>) derives directly from the native Tamil language words <strong className="font-semibold text-forest">Vettiveru (வெட்டிவேர்)</strong> — synthesized from <em>"Vetti"</em> (dug up/cut) and <em>"Veru"</em> (root). Born from the soil of Tamil Nadu, South India, this Tamil origin term has been embraced globally across French perfumery, international trade, and essential oil terminology worldwide.
+                <strong className="font-semibold text-forest font-serif">Vetriver</strong> — a <strong className="font-semibold font-serif">Tamil word</strong> that has travelled far beyond Tamil Nadu, now known and valued across the world. Proudly rooted in Tamil மொழி and heritage, it carries our land’s fragrance into global homes.
               </p>
             </div>
           </div>
