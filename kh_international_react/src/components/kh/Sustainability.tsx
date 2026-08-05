@@ -23,9 +23,9 @@ export function Sustainability() {
           {/* Program 1 */}
           <div className="rounded-2xl border border-border bg-background p-8 sm:p-10 shadow-sm hover:shadow-xl transition-all relative overflow-hidden flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between gap-4 mb-6 border-b border-border/60 pb-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 border-b border-border/60 pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-forest/10 flex items-center justify-center text-forest">
+                  <div className="w-12 h-12 rounded-lg bg-forest/10 flex items-center justify-center text-forest shrink-0">
                     <Sprout className="w-6 h-6" />
                   </div>
                   <div>
@@ -33,11 +33,11 @@ export function Sustainability() {
                     <h3 className="font-serif text-2xl text-foreground">The Farming Partnership Program</h3>
                   </div>
                 </div>
-                <div className="flex space-x-2 p-2 text-md width-full">
-                  <span className="font-serif font-bold text-forest bg-forest/10 px-3 py-1 rounded-md shrink-0">
+                <div className="flex flex-col sm:flex-row gap-2 text-sm shrink-0">
+                  <span className="font-serif font-bold text-forest bg-forest/10 px-3 py-1 rounded-md shrink-0 text-center">
                     500+ Women
                   </span>
-                  <span className="font-serif font-bold text-forest bg-forest/10 px-3 py-1 rounded-md shrink-0">
+                  <span className="font-serif font-bold text-forest bg-forest/10 px-3 py-1 rounded-md shrink-0 text-center">
                     100+ Acres
                   </span>
                 </div>
@@ -52,9 +52,9 @@ export function Sustainability() {
           {/* Program 2 */}
           <div className="rounded-2xl border border-border bg-background p-8 sm:p-10 shadow-sm hover:shadow-xl transition-all relative overflow-hidden flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between gap-4 mb-6 border-b border-border/60 pb-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 border-b border-border/60 pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold">
+                  <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold shrink-0">
                     <Palette className="w-6 h-6" />
                   </div>
                   <div>
@@ -62,7 +62,7 @@ export function Sustainability() {
                     <h3 className="font-serif text-2xl text-foreground">The Vetriver Craft Program</h3>
                   </div>
                 </div>
-                <span className="text-md font-serif font-bold text-gold bg-gold/10 px-3 py-1 rounded-md shrink-0">
+                <span className="text-sm font-serif font-bold text-gold bg-gold/10 px-3 py-1 rounded-md shrink-0">
                   400+ Women
                 </span>
               </div>

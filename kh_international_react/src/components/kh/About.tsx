@@ -74,38 +74,6 @@ export function About() {
             </div>
           </div>
         </div>
-
-        {/* KH International, by the numbers */}
-        <div className="mt-20 border-t border-border/60 pt-16">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-[11px] tracking-[0.3em] text-gold uppercase font-semibold block mb-2">
-              Verified Impact
-            </span>
-            <h3 className="font-serif text-3xl text-foreground">KH International, by the numbers</h3>
-            <p className="text-sm text-muted-foreground mt-2">
-              Clean, citable operational figures supporting downstream ESG reporting for our global trade partners.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((st) => (
-              <div
-                key={st.label}
-                className="p-8 rounded-xl border border-border/80 bg-card hover:border-gold/60 transition-all text-center group hover:shadow-lg"
-              >
-                <div className="font-serif text-4xl sm:text-5xl font-bold text-forest group-hover:text-gold transition-colors">
-                  {st.value}
-                </div>
-                <div className="text-xs font-semibold uppercase tracking-wider text-foreground mt-3">
-                  {st.label}
-                </div>
-                <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
-                  {st.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
