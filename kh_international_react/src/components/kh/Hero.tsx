@@ -117,7 +117,7 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
             })}
           </div>
         </div>
-      </div>
+      </div> 
     </section>
   );
 }
