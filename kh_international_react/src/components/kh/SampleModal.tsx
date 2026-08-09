@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { X, Download, CheckCircle2, Send, ShieldCheck } from "lucide-react";
+import { X, Download, CheckCircle2, Send, ShieldCheck, Unlock } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 
 interface SampleModalProps {
@@ -19,9 +20,10 @@ export function SampleModal({ isOpen, onClose, defaultType = "sample" }: SampleM
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
+      sessionStorage.setItem("kh_doc_access", "true");
       setLoading(false);
       setSubmitted(true);
-      toast.success("Request received! Our international trade team will reach out within 24 hours.");
+      toast.success("Request received! Document access granted.");
     }, 600);
   }
 
@@ -46,23 +48,22 @@ export function SampleModal({ isOpen, onClose, defaultType = "sample" }: SampleM
             <div className="mx-auto w-16 h-16 rounded-full bg-forest/10 border border-forest/30 flex items-center justify-center text-forest mb-4">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h3 className="font-serif text-3xl text-foreground">Thank You</h3>
+            <h3 className="font-serif text-3xl text-foreground">Access Granted</h3>
             <p className="mt-3 text-muted-foreground max-w-md mx-auto text-sm leading-relaxed">
-              Your request has been routed directly to our global trade desk (<span className="text-forest font-medium">export@khinternational.org.in</span>).
-              A representative will email you our latest GC-MS Report, Certificate of Analysis (CoA), and sample dispatch terms.
+              Your request has been routed to our export desk (<span className="text-forest font-medium">export@khinternational.org.in</span>).
+              You now have full access to view and download all 5 official compliance & technical report files.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 justify-center">
-              <button
-                onClick={() => {
-                  toast.info("Downloading KH_Vetriver_Oil_GCMS_Spec_Sheet.pdf");
-                }}
-                className="inline-flex items-center gap-2 border border-gold bg-gold/10 px-5 py-2.5 text-xs font-medium uppercase tracking-widest text-gold hover:bg-gold hover:text-white transition-colors"
+              <Link
+                to="/reports"
+                onClick={onClose}
+                className="inline-flex items-center gap-2 border border-gold bg-gold px-6 py-2.5 text-xs font-semibold uppercase tracking-widest text-white hover:bg-forest transition-colors rounded-lg shadow-sm"
               >
-                <Download className="w-4 h-4" /> Download Tech Spec Sheet (PDF)
-              </button>
+                <Unlock className="w-4 h-4" /> View Technical Reports (5 Files)
+              </Link>
               <button
                 onClick={handleReset}
-                className="inline-flex items-center justify-center border border-border px-5 py-2.5 text-xs font-medium uppercase tracking-widest text-foreground hover:bg-muted transition-colors"
+                className="inline-flex items-center justify-center border border-border px-5 py-2.5 text-xs font-medium uppercase tracking-widest text-foreground hover:bg-muted transition-colors rounded-lg"
               >
                 Close Window
               </button>

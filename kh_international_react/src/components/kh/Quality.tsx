@@ -1,12 +1,10 @@
-import { ShieldCheck, FileText, ExternalLink } from "lucide-react";
+import { ShieldCheck, FileText, Lock, ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 interface StepItem {
   title: string;
   desc?: string;
-  link?: {
-    label: string;
-    url: string;
-  };
+  isProtectedDoc?: boolean;
 }
 
 interface Tier {
@@ -51,10 +49,7 @@ const tiersData: Tier[] = [
       {
         title: "SDS (Safety Data Sheet) in GHS/CLP format",
         desc: "The EU-compliant format buyers will expect, distinct from a basic MSDS.",
-        link: {
-          label: "View MSDS",
-          url: "https://drive.google.com/file/d/139cHzgOttmjw6F1XoGpqq6CCjkLyiQaQ/view?usp=sharing",
-        },
+        isProtectedDoc: true,
       },
       {
         title: "Canada-specific compliance",
@@ -69,22 +64,17 @@ const tiersData: Tier[] = [
       {
         title: "Certificate of Analysis (CoA) / GC-MS report",
         desc: "Issued per batch detailing physical-chemical specifications and purity.",
-        link: {
-          label: "View Certificate of Analysis (COA)",
-          url: "https://drive.google.com/file/d/1j62MrUs-pVLiStSMGgXkK0s08EYEha6Y/view?usp=sharing",
-        },
+        isProtectedDoc: true,
       },
       {
         title: "Certificate of Origin",
         desc: "Issued by Chamber of Commerce confirming origin from Tamil Nadu, South India.",
-        link: {
-          label: "View Certificate of Origin",
-          url: "https://drive.google.com/file/d/1ilxK-41triF3QH80kNfiS95E80u5C0bj/view?usp=sharing",
-        },
+        isProtectedDoc: true,
       },
       {
         title: "Safety Data Sheet",
         desc: "Matching the specific shipment batch.",
+        isProtectedDoc: true,
       },
       {
         title: "Phytosanitary Certificate",
@@ -172,21 +162,6 @@ export function Quality() {
                         )}
                       </div>
                     </div>
-
-                    {item.link && (
-                      <div className="mt-3 pt-3 border-t border-border/60 w-full flex justify-start">
-                        <a
-                          href={item.link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-forest hover:text-gold transition-colors"
-                        >
-                          <FileText className="w-3.5 h-3.5" />
-                          <span>{item.link.label}</span>
-                          <ExternalLink className="w-3 h-3 opacity-70" />
-                        </a>
-                      </div>
-                    )}
                   </div>
                 ))}
               </div>

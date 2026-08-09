@@ -15,7 +15,6 @@ const navLinks = [
   { href: "#markets", label: "Global Trade" },
   { href: "#quality", label: "Compliance" },
   { href: "#farmers", label: "Farmers (தமிழ்)", isBadge: true },
-  { href: "#contact", label: "Contact" },
 ];
 
 export function Nav({ onOpenSampleModal }: NavProps) {
@@ -62,12 +61,12 @@ export function Nav({ onOpenSampleModal }: NavProps) {
 
         {/* Action Button & Mobile / Tablet Toggle */}
         <div className="flex items-center gap-3 shrink-0">
-          <button
-            onClick={() => onOpenSampleModal?.("sample")}
+          <a
+            href="#contact"
             className="hidden sm:inline-flex items-center justify-center border border-gold bg-gold px-4 sm:px-5 py-2.5 text-[11px] font-medium tracking-[0.16em] text-white uppercase transition-all hover:bg-forest hover:border-forest shadow-sm whitespace-nowrap"
           >
             Request Sample
-          </button>
+          </a>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -101,15 +100,13 @@ export function Nav({ onOpenSampleModal }: NavProps) {
           </div>
 
           <div className="pt-4 border-t border-border/60 flex flex-col sm:flex-row gap-3">
-            <button
-              onClick={() => {
-                setMobileOpen(false);
-                onOpenSampleModal?.("sample");
-              }}
+            <a
+              href="#contact"
+              onClick={() => setMobileOpen(false)}
               className="w-full text-center border border-gold bg-gold py-3 text-xs font-semibold uppercase tracking-widest text-white hover:bg-forest transition-colors shadow-sm"
             >
               Request Sample Vial (100g)
-            </button>
+            </a>
             <button
               onClick={() => {
                 setMobileOpen(false);

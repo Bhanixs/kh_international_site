@@ -34,6 +34,7 @@ export function Footer() {
               <li><a href="#sustainability" className="hover:text-gold transition-colors">Page 5 — Sustainability</a></li>
               <li><a href="#markets" className="hover:text-gold transition-colors">Page 6 — Global Trade (France)</a></li>
               <li><a href="#quality" className="hover:text-gold transition-colors">Page 7 — Compliance Matrix</a></li>
+              <li><a href="/reports" className="text-gold font-semibold hover:underline flex items-center gap-1">Reports & Lab Files Portal</a></li>
               <li><a href="#farmers" className="hover:text-gold transition-colors">Farmers (தமிழ்)</a></li>
               <li><a href="#contact" className="hover:text-gold transition-colors">Page 8 — Trade Inquiry</a></li>
             </ul>

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
-import { Phone, Mail, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Phone, Mail, MapPin, Send, CheckCircle2, Unlock, FileText } from "lucide-react";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Name / Company Name is required").max(150),
@@ -26,10 +27,11 @@ export function Contact() {
     }
     setSubmitting(true);
     setTimeout(() => {
+      sessionStorage.setItem("kh_doc_access", "true");
       setSubmitting(false);
       setSubmitted(true);
       form.reset();
-      toast.success("Thank you! Your trade inquiry has been submitted to export@khinternational.org.in");
+      toast.success("Thank you! Your trade inquiry has been submitted and compliance documents unlocked.");
     }, 600);
   }
 
@@ -114,16 +116,25 @@ export function Contact() {
                   <div className="mx-auto w-16 h-16 rounded-full bg-forest/10 text-forest flex items-center justify-center mb-4">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
-                  <h3 className="font-serif text-3xl text-foreground">Inquiry Received</h3>
+                  <h3 className="font-serif text-3xl text-foreground">Inquiry Received & Access Unlocked!</h3>
                   <p className="text-sm text-muted-foreground mt-3 max-w-md mx-auto leading-relaxed">
-                    Thank you for reaching out to KH International. Our export trade desk (<span className="text-forest font-semibold">export@khinternational.org.in</span>) has received your details and will respond within 24 hours.
+                    Thank you for reaching out. Our trade desk has received your request, and full access to our 5 official technical & compliance reports has been unlocked for your session.
                   </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="mt-8 border border-gold bg-gold text-white px-8 py-3 text-xs uppercase tracking-widest font-medium hover:bg-forest transition-colors rounded-lg"
-                  >
-                    Submit Another Inquiry
-                  </button>
+
+                  <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+                    <Link
+                      to="/reports"
+                      className="inline-flex items-center justify-center gap-2 border border-gold bg-gold text-white px-8 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-forest hover:border-forest transition-colors rounded-xl shadow-md"
+                    >
+                      <Unlock className="w-4 h-4" /> View Technical Reports (5 Files)
+                    </Link>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="border border-border text-foreground px-6 py-3 text-xs uppercase tracking-widest font-medium hover:bg-muted transition-colors rounded-xl"
+                    >
+                      Submit Another Inquiry
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={onSubmit} noValidate className="space-y-6">

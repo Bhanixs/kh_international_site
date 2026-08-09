@@ -1,6 +1,7 @@
 import { useState } from "react";
 import img from "@/assets/market-france.jpeg";
 import { Globe2, FileCheck2, Truck, ShieldCheck, ArrowRight, Languages, FileText, ExternalLink } from "lucide-react";
+import graph from "@/assets/graph.png";
 
 interface MarketsFranceProps {
   onOpenSampleModal?: (type?: "sample" | "partner" | "gcms") => void;
@@ -64,17 +65,15 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
                 <Languages className="w-3.5 h-3.5 text-muted-foreground ml-1.5" />
                 <button
                   onClick={() => setLang("en")}
-                  className={`px-3 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-md transition-all ${
-                    lang === "en" ? "bg-forest text-white shadow-xs" : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`px-3 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-md transition-all ${lang === "en" ? "bg-forest text-white shadow-xs" : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   EN
                 </button>
                 <button
                   onClick={() => setLang("fr")}
-                  className={`px-3 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-md transition-all ${
-                    lang === "fr" ? "bg-forest text-white shadow-xs" : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`px-3 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-md transition-all ${lang === "fr" ? "bg-forest text-white shadow-xs" : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   FR
                 </button>
@@ -119,19 +118,130 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
             ))}
           </div>
         </div>
-        {/* Environmental Monitoring Service Button */}
-        <div className="flex flex-wrap gap-3 shrink-0 items-center justify-center mt-16">
-              <a
-                href="https://drive.google.com/file/d/1pqmkze-rB-n4JEUYzAeTxVPALdgQMGyT/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-forest bg-forest px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-gold transition-colors rounded-xl shadow-xs"
-              >
-                <FileText className="w-4 h-4" />
-                 Environmental Monitoring Service
-                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
-              </a>
+        {/* GC-MS Chromatogram & Analysis Table */}
+        <div className="mt-16 pt-16 border-t border-border/60">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-[11px] tracking-[0.3em] font-semibold text-gold uppercase block mb-2">
+              {lang === "en" ? "Laboratory Verification" : "Vérification en Laboratoire"}
+            </span>
+            <h3 className="font-serif text-3xl text-foreground">
+              {lang === "en"
+                ? "GC-MS Chromatogram & Key Compounds Data"
+                : "Chromatogramme GC-MS & Données des Composés Clés"}
+            </h3>
+            <p className="text-xs text-muted-foreground mt-2 font-light max-w-lg mx-auto">
+              {lang === "en"
+                ? "Detailed gas chromatography-mass spectrometry peak analysis confirming essential oil purity and chemical composition."
+                : "Analyse détaillée des pics par chromatographie en phase gazeuse et spectrométrie de masse confirmant la pureté et la composition de l'huile essentielle."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Graph Image Column */}
+            <div className="lg:col-span-5 flex flex-col items-center">
+              <div className="w-full rounded-2xl overflow-hidden border border-border/80 bg-background p-4 shadow-lg">
+                <img
+                  src={graph}
+                  alt="Graph Image"
+                  className="w-full h-auto object-contain rounded-lg transition-transform duration-500 hover:scale-[1.02]"
+                />
+                <div className="mt-3 text-center">
+                  <span className="text-[11px] font-mono text-muted-foreground">
+                    {lang === "en"
+                      ? "Image: (Time vs. Voltage [mV])"
+                      : "Image: (Temps vs. Tension [mV])"}
+                  </span>
+                </div>
+              </div>
             </div>
+
+            {/* Table Column */}
+            <div className="lg:col-span-7 overflow-hidden rounded-2xl border border-border/80 bg-card">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-muted/40 text-muted-foreground uppercase tracking-wider font-semibold border-b border-border/60 text-[10px]">
+                    <tr>
+                      <th className="py-3.5 px-4 font-semibold text-foreground">
+                        {lang === "en" ? "Compound Name" : "Nom du composé"}
+                      </th>
+                      <th className="py-3.5 px-3 text-right">
+                        {lang === "en" ? "Reten. Time [min]" : "Temps Rét. [min]"}
+                      </th>
+                      <th className="py-3.5 px-3 text-right">
+                        {lang === "en" ? "Area [mV.s]" : "Aire [mV.s]"}
+                      </th>
+                      <th className="py-3.5 px-3 text-right">
+                        {lang === "en" ? "Height [mV]" : "Hauteur [mV]"}
+                      </th>
+                      <th className="py-3.5 px-3 text-right">
+                        {lang === "en" ? "Height [%]" : "Hauteur [%]"}
+                      </th>
+                      <th className="py-3.5 px-3 text-right font-semibold text-foreground">
+                        {lang === "en" ? "Area [%]" : "Aire [%]"}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border/60 font-mono text-[11px]">
+                    {[
+                      {
+                        compound: "b Vetivenene",
+                        retenTime: "27.707",
+                        areaMVs: "70.007",
+                        heightMV: "12.367",
+                        heightPct: "3.7",
+                        areaPct: "3.116",
+                      },
+                      {
+                        compound: "Khusimol",
+                        retenTime: "33.840",
+                        areaMVs: "358.965",
+                        heightMV: "56.082",
+                        heightPct: "16.8",
+                        areaPct: "11-14",
+                      },
+                      {
+                        compound: "Isovalencenol",
+                        retenTime: "34.992",
+                        areaMVs: "245.661",
+                        heightMV: "46.103",
+                        heightPct: "13.8",
+                        areaPct: "10.935",
+                      },
+                      {
+                        compound: "b Vetivone",
+                        retenTime: "35.379",
+                        areaMVs: "72.888",
+                        heightMV: "13.750",
+                        heightPct: "4.1",
+                        areaPct: "3.244",
+                      },
+                      {
+                        compound: "a Vetivone",
+                        retenTime: "35.893",
+                        areaMVs: "74.161",
+                        heightMV: "16.040",
+                        heightPct: "4.8",
+                        areaPct: "3.301",
+                      },
+                    ].map((row, idx) => (
+                      <tr key={idx}>
+                        <td className="py-3 px-4 font-sans font-medium text-foreground text-xs flex items-center gap-1.5">
+                          <span className="h-1.5 w-1.5 rounded-full bg-gold/70 shrink-0" />
+                          {row.compound}
+                        </td>
+                        <td className="py-3 px-3 text-right text-muted-foreground">{row.retenTime}</td>
+                        <td className="py-3 px-3 text-right text-muted-foreground">{row.areaMVs}</td>
+                        <td className="py-3 px-3 text-right text-muted-foreground">{row.heightMV}</td>
+                        <td className="py-3 px-3 text-right text-muted-foreground">{row.heightPct}%</td>
+                        <td className="py-3 px-3 text-right font-semibold text-forest">{row.areaPct}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

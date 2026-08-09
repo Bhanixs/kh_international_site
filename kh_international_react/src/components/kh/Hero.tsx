@@ -56,19 +56,13 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
 
           {/* Primary Call to Action Buttons */}
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <button
-              onClick={() => onOpenSampleModal?.("sample")}
+            <a
+              href="#contact"
               className="inline-flex items-center justify-center gap-3 border border-gold bg-gold px-8 py-4 text-[12px] font-medium tracking-[0.2em] text-white uppercase transition-all duration-300 hover:bg-forest hover:border-forest shadow-md hover:shadow-xl"
             >
               <span>Request a Sample</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => onOpenSampleModal?.("partner")}
-              className="inline-flex items-center justify-center border border-forest/40 bg-transparent px-8 py-4 text-[12px] font-medium tracking-[0.2em] text-forest uppercase transition-all duration-300 hover:bg-forest hover:text-white"
-            >
-              Become a Trade Partner
-            </button>
+            </a>
           </div>
         </div>
 
@@ -117,7 +111,7 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
             })}
           </div>
         </div>
-      </div> 
+      </div>
     </section>
   );
 }
