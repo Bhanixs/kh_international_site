@@ -50,18 +50,8 @@ export function Footer() {
               <div className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-gold shrink-0 mt-0.5" />
                 <div>
-                  <span className="block text-[10px] text-white/60 uppercase">E-Mail - 1</span>
-                  <a href="mailto:export@khinternational.org.in" className="font-semibold text-white hover:text-gold">
-                    export@khinternational.org.in
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                <div>
-                  <span className="block text-[10px] text-white/60 uppercase">E-Mail - 02</span>
-                  <a href="mailto:info@khinternational.org.in" className="text-white/90 hover:text-gold">
+                  <span className="block text-[10px] text-white/60 uppercase">E-Mail</span>
+                  <a href="mailto:info@khinternational.org.in" className="font-semibold text-white hover:text-gold">
                     info@khinternational.org.in
                   </a>
                 </div>

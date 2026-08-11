@@ -63,14 +63,11 @@ export function Contact() {
                       Dedicated Global Trade Email
                     </span>
                     <a
-                      href="mailto:export@khinternational.org.in"
+                      href="mailto:info@khinternational.org.in"
                       className="text-base font-semibold text-foreground hover:text-forest transition-colors block"
                     >
-                      export@khinternational.org.in
+                      info@khinternational.org.in
                     </a>
-                    <span className="text-xs text-muted-foreground mt-0.5 block">
-                      General: <a href="mailto:info@khinternational.org.in" className="hover:underline">info@khinternational.org.in</a>
-                    </span>
                   </div>
                 </div>
 
