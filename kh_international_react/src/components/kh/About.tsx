@@ -1,4 +1,4 @@
-import aboutImg from "@/assets/about-sourcing-2.jpeg";
+import aboutImg from "@/assets/optimized/about-576-q80.webp";
 import { Info, CheckCircle2, ShieldCheck } from "lucide-react";
 
 const stats = [
@@ -35,9 +35,10 @@ export function About() {
               <img
                 src={aboutImg}
                 alt="Hands cradling freshly harvested vetriver roots in Villupuram, Tamil Nadu"
-                width={1200}
-                height={1400}
+                width={576}
+                height={865}
                 loading="lazy"
+                decoding="async"
                 className="h-full min-h-[520px] w-full object-cover opacity-90 transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8 flex flex-col justify-end text-white">

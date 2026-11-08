@@ -30,3 +30,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local environment files (secrets must never be committed); the template stays tracked
+.env
+.env.*
+!.env.example
+
+# Mock email outbox written by local enquiry tests
+/.enquiry-outbox/

@@ -1,7 +1,9 @@
 import { useState } from "react";
-import img from "@/assets/market-france.jpeg";
+import img from "@/assets/optimized/france-960-q85.webp";
+import img1440 from "@/assets/optimized/france-1440-q90.webp";
+import img2160 from "@/assets/optimized/france-2160-q90.webp";
 import { Globe2, FileCheck2, Truck, ShieldCheck, ArrowRight, Languages, FileText, ExternalLink } from "lucide-react";
-import graph from "@/assets/graph.png";
+import graph from "@/assets/optimized/graph-976-lossless.webp";
 
 interface MarketsFranceProps {
   onOpenSampleModal?: (type?: "sample" | "partner" | "gcms") => void;
@@ -25,6 +27,7 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
   const [lang, setLang] = useState<"en" | "fr">("en");
 
   const steps = lang === "en" ? stepsEN : stepsFR;
+  const textLang = lang === "fr" ? "fr" : undefined;
 
   return (
     <section id="markets" className="border-b border-border/60 bg-background py-20 lg:py-28">
@@ -35,10 +38,12 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
             <div className="relative rounded-2xl overflow-hidden border border-border/80 shadow-2xl">
               <img
                 src={img}
+                srcSet={`${img} 1x, ${img1440} 2x, ${img2160} 3x`}
                 alt="French perfumer atelier formulation laboratory"
-                width={1200}
-                height={1400}
+                width={2686}
+                height={1871}
                 loading="lazy"
+                decoding="async"
                 className="h-full min-h-[480px] w-full object-cover transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-8 flex flex-col justify-end text-white">
@@ -61,9 +66,11 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
               </span>
 
               {/* Language Switcher */}
-              <div className="flex items-center gap-1.5 bg-alabaster p-1 rounded-lg border border-border">
+              <div role="group" aria-label="Language" className="flex items-center gap-1.5 bg-alabaster p-1 rounded-lg border border-border">
                 <Languages className="w-3.5 h-3.5 text-muted-foreground ml-1.5" />
                 <button
+                  aria-label="English"
+                  aria-pressed={lang === "en"}
                   onClick={() => setLang("en")}
                   className={`px-3 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-md transition-all ${lang === "en" ? "bg-forest text-white shadow-xs" : "text-muted-foreground hover:text-foreground"
                     }`}
@@ -71,6 +78,9 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
                   EN
                 </button>
                 <button
+                  lang="fr"
+                  aria-label="Français"
+                  aria-pressed={lang === "fr"}
                   onClick={() => setLang("fr")}
                   className={`px-3 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-md transition-all ${lang === "fr" ? "bg-forest text-white shadow-xs" : "text-muted-foreground hover:text-foreground"
                     }`}
@@ -80,13 +90,13 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
               </div>
             </div>
 
-            <h2 className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl font-normal">
+            <h2 lang={textLang} className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl font-normal">
               {lang === "en"
                 ? "A Proven Export Supply Chain — Now Open to France and Europe"
                 : "Un Réseau d'Approvisionnement Éprouvé — Ouvert à la France et à l'Europe"}
             </h2>
 
-            <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground font-light">
+            <div lang={textLang} className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground font-light">
               <p>
                 {lang === "en"
                   ? "KH International currently supplies vetriver oil to the Canadian market — a live, working export operation, not a first-time attempt at international trade. We're now building the same long-term relationships with trade houses, buying houses, and perfumery ingredient distributors in France and across Europe."
@@ -104,12 +114,12 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
         {/* How a Partnership Starts Workflow */}
         <div className="mt-12 pt-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h3 className="font-serif text-3xl text-foreground">
+            <h3 lang={textLang} className="font-serif text-3xl text-foreground">
               {lang === "en" ? "How a Partnership Starts" : "Comment Débute un Partenariat"}
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div lang={textLang} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((st) => (
               <div key={st.step} className="p-8 rounded-xl border border-gold bg-card transition-all hover:shadow-lg relative">
                 <span className="font-serif text-4xl font-bold text-gold/60 block mb-3">{st.step}</span>
@@ -120,7 +130,7 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
         </div>
         {/* GC-MS Chromatogram & Analysis Table */}
         <div className="mt-16 pt-16 border-t border-border/60">
-          <div className="text-center max-w-2xl mx-auto mb-10">
+          <div lang={textLang} className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-[11px] tracking-[0.3em] font-semibold text-gold uppercase block mb-2">
               {lang === "en" ? "Laboratory Verification" : "Vérification en Laboratoire"}
             </span>
@@ -143,10 +153,14 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
                 <img
                   src={graph}
                   alt="Graph Image"
+                  width={976}
+                  height={558}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-auto object-contain rounded-lg transition-transform duration-500 hover:scale-[1.02]"
                 />
                 <div className="mt-3 text-center">
-                  <span className="text-[11px] font-mono text-muted-foreground">
+                  <span lang={textLang} className="text-[11px] font-mono text-muted-foreground">
                     {lang === "en"
                       ? "Image: (Time vs. Voltage [mV])"
                       : "Image: (Temps vs. Tension [mV])"}
@@ -159,7 +173,7 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
             <div className="lg:col-span-7 overflow-hidden rounded-2xl border border-border/80 bg-card">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-muted/40 text-muted-foreground uppercase tracking-wider font-semibold border-b border-border/60 text-[10px]">
+                  <thead lang={textLang} className="bg-muted/40 text-muted-foreground uppercase tracking-wider font-semibold border-b border-border/60 text-[10px]">
                     <tr>
                       <th className="py-3.5 px-4 font-semibold text-foreground">
                         {lang === "en" ? "Compound Name" : "Nom du composé"}

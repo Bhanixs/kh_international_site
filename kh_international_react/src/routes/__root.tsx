@@ -77,14 +77,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      // Site-wide defaults; routes override title, description and canonical. Also used by the 404 page.
+      { title: "Page not found — KH International" },
+      { property: "og:site_name", content: "KH International" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      // No share image exists yet (pending owner approval), so the large-image card is not used.
+      { name: "twitter:card", content: "summary" },
     ],
     links: [
       {

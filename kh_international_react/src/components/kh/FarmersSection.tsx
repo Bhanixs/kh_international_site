@@ -3,6 +3,7 @@ import { Sprout, HeartHandshake, Shield, Sparkles, PhoneCall, CheckCircle } from
 
 export function FarmersSection() {
   const [lang, setLang] = useState<"ta" | "en">("en");
+  const textLang = lang === "ta" ? "ta" : undefined;
 
   return (
     <section id="farmers" className="border-t border-b border-border/60 bg-alabaster py-20 lg:py-28">
@@ -12,12 +13,12 @@ export function FarmersSection() {
             <span className="text-[11px] tracking-[0.3em] text-forest uppercase font-semibold block mb-2">
               Livelihoods & Farmer Recruitment · Tamil Nadu
             </span>
-            <h2 className="font-serif text-3xl leading-tight text-foreground sm:text-4xl lg:text-5xl">
+            <h2 lang={textLang} className="font-serif text-3xl leading-tight text-foreground sm:text-4xl lg:text-5xl">
               {lang === "en"
                 ? "For Partner Farmers & Women Artisans"
                 : "வெட்டிவேர் விவசாயிகள் மற்றும் கைவினைஞர்கள் சேர்க்கை"}
             </h2>
-            <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+            <p lang={textLang} className="mt-4 text-base text-muted-foreground leading-relaxed">
               {lang === "en"
                 ? "Empowering local agriculture through low-water vetriver farming and handwoven root craft. Building stable, dignified income across Villupuram district."
                 : "குறைந்த நீர் தேவையில் அதிக வருமானம் தரும் வெட்டிவேர் சாகுபடி மற்றும் பாரம்பரிய கைவினைத் தொழில் பயிற்சி. விழுப்புரம் மாவட்ட விவசாயிகளின் வாழ்வாதார மேம்பாடு."}
@@ -25,8 +26,9 @@ export function FarmersSection() {
           </div>
 
           {/* Language Switcher */}
-          <div className="flex items-center gap-2 bg-background p-1.5 rounded-lg border border-border shrink-0">
+          <div role="group" aria-label="Language" className="flex items-center gap-2 bg-background p-1.5 rounded-lg border border-border shrink-0">
             <button
+              aria-pressed={lang === "en"}
               onClick={() => setLang("en")}
               className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
                 lang === "en"
@@ -37,6 +39,7 @@ export function FarmersSection() {
               English
             </button>
             <button
+              aria-pressed={lang === "ta"}
               onClick={() => setLang("ta")}
               className={`px-4 py-2 text-xs font-semibold tracking-wider rounded-md transition-all ${
                 lang === "ta"
@@ -44,13 +47,13 @@ export function FarmersSection() {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              தமிழ் (Tamil)
+              <span lang="ta">தமிழ்</span> (Tamil)
             </button>
           </div>
         </div>
 
         {/* 4 Steps for Farmers / Artisans */}
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div lang={textLang} className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-xl bg-background p-6 border border-border/80 shadow-sm hover:border-gold/60 transition-colors">
             <div className="w-12 h-12 rounded-lg bg-forest/10 flex items-center justify-center text-forest mb-4">
               <Sprout className="w-6 h-6" />
@@ -109,7 +112,7 @@ export function FarmersSection() {
         </div>
 
         {/* Contact Banner for Farmers */}
-        <div className="mt-12 rounded-xl bg-forest p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+        <div lang={textLang} className="mt-12 rounded-xl bg-forest p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-gold text-xs uppercase tracking-widest font-semibold mb-1">
               <CheckCircle className="w-4 h-4" />

@@ -150,3 +150,29 @@
     color: var(--color-foreground);
   }
 }
+
+#main-content > section:not(#home),
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1800px;
+}
+
+/* Honour the visitor's reduced-motion setting. Tailwind v4 compiles hover zoom and
+   lift to the standalone `scale` and `translate` properties, so reset those directly. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [class*="hover:scale-"]:hover,
+  [class*="hover:-translate-y-"]:hover,
+  .group:hover [class*="group-hover:scale-"] {
+    scale: none !important;
+    translate: none !important;
+  }
+}

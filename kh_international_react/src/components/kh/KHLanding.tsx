@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Nav } from "./Nav";
 import { Hero } from "./Hero";
 import { About } from "./About";
@@ -16,6 +16,7 @@ import { Toaster } from "@/components/ui/sonner";
 export function KHLanding() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"sample" | "partner" | "gcms">("sample");
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   function handleOpenModal(type: "sample" | "partner" | "gcms" = "sample") {
     setModalType(type);
@@ -24,8 +25,14 @@ export function KHLanding() {
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-gold selection:text-white">
-      <Nav onOpenSampleModal={handleOpenModal} />
-      <main>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-forest focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+      >
+        Skip to main content
+      </a>
+      <Nav onOpenSampleModal={handleOpenModal} menuButtonRef={menuButtonRef} />
+      <main id="main-content" tabIndex={-1} className="outline-none">
         {/* Page 1 — Home */}
         <Hero onOpenSampleModal={handleOpenModal} />
 
@@ -60,9 +67,11 @@ export function KHLanding() {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         defaultType={modalType}
+        returnFocusRef={menuButtonRef}
       />
 
-      <Toaster position="top-center" />
+      {/* Bottom placement keeps toasts clear of the sticky header and the mobile menu toggle. */}
+      <Toaster position="bottom-center" />
     </div>
   );
 }
