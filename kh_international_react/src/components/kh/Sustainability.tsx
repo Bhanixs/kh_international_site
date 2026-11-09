@@ -1,4 +1,4 @@
-import img from "@/assets/farmer-section.jpeg";
+import img from "@/assets/optimized/farmer-461-q80.webp";
 import { img1, img2, img3, img4, img5, img6 } from "@/assets/photo-card";
 import { Sprout, Palette } from "lucide-react";
 
@@ -89,8 +89,10 @@ export function Sustainability() {
                 <img
                   src={img}
                   alt="Farming community harvesting vetriver at golden hour in South India"
-                  width={1200}
-                  height={1400}
+                  width={461}
+                  height={465}
+                  loading="lazy"
+                  decoding="async"
                   className="h-[260px] w-full object-cover"
                 />
               </div>
@@ -109,6 +111,8 @@ export function Sustainability() {
                 <img
                   src={photo}
                   alt={`Vetriver farming & artisan craft highlight ${idx + 1}`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center"
                 />
               </div>

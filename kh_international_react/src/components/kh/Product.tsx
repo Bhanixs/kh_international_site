@@ -1,4 +1,4 @@
-import productImg from "@/assets/product-vetiver-2.jpeg";
+import productImg from "@/assets/optimized/product-1280-q85.webp";
 import { Sparkles, FileSpreadsheet } from "lucide-react";
 
 interface ProductProps {
@@ -59,7 +59,7 @@ export function Product({ onOpenSampleModal }: ProductProps) {
                 Etymology & Tamil Roots
               </span>
               <p className="text-xs sm:text-sm leading-relaxed text-foreground/90 font-light">
-                <strong className="font-semibold text-forest font-serif">Vetriver</strong> — a <strong className="font-semibold font-serif">Tamil word</strong> that has travelled far beyond Tamil Nadu, now known and valued across the world. Proudly rooted in Tamil மொழி and heritage, it carries our land’s fragrance into global homes.
+                <strong className="font-semibold text-forest font-serif">Vetriver</strong> — a <strong className="font-semibold font-serif">Tamil word</strong> that has travelled far beyond Tamil Nadu, now known and valued across the world. Proudly rooted in Tamil <span lang="ta">மொழி</span> and heritage, it carries our land’s fragrance into global homes.
               </p>
             </div>
           </div>
@@ -70,9 +70,10 @@ export function Product({ onOpenSampleModal }: ProductProps) {
               <img
                 src={productImg}
                 alt="Vetriver roots with amber essential oil vial in natural light"
-                width={800}
-                height={800}
+                width={1280}
+                height={576}
                 loading="lazy"
+                decoding="async"
                 className="h-full min-h-[460px] w-full object-cover transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute bottom-6 left-6 right-6 rounded-xl bg-black/75 backdrop-blur-md p-5 border border-white/10 text-white">

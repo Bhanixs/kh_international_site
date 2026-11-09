@@ -13,8 +13,9 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://www.khinternational.org.in/" },
     ],
+    links: [{ rel: "canonical", href: "https://www.khinternational.org.in/" }],
   }),
   component: KHLanding,
 });

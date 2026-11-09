@@ -1,38 +1,193 @@
-import { useState } from "react";
-import { z } from "zod";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { flushSync } from "react-dom";
 import { toast } from "sonner";
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, Send, CheckCircle2, Unlock, FileText } from "lucide-react";
+import { Phone, Mail, MapPin, Send, CheckCircle2, Unlock } from "lucide-react";
+import {
+  CONTACT_FIELD_ORDER,
+  HONEYPOT_FIELD,
+  LIMITS,
+  validateContactFields,
+  type FieldErrors,
+} from "@/lib/enquiry/schema";
+import { useEnquirySubmission, type SubmitErrorCode } from "@/lib/enquiry/client";
+import { grantDocAccess } from "@/lib/doc-access";
+import { turnstileSiteKey } from "@/lib/enquiry/turnstile-key";
+import { TurnstileWidget, type TurnstileHandle, type TurnstileStatus } from "./TurnstileWidget";
+import { EnquiryErrorNotice, MockModeNotice } from "./EnquiryStatus";
 
-const schema = z.object({
-  name: z.string().trim().min(1, "Name / Company Name is required").max(150),
-  country: z.string().trim().min(1, "Country is required").max(100),
-  product: z.string().trim().optional().or(z.literal("")),
-  volume: z.string().trim().optional().or(z.literal("")),
-  message: z.string().trim().max(1000).optional().or(z.literal("")),
-});
+const FIELD_IDS: Record<(typeof CONTACT_FIELD_ORDER)[number], string> = {
+  fullName: "contact-name",
+  company: "contact-company",
+  email: "contact-email",
+  country: "contact-country",
+  phone: "contact-phone",
+  product: "contact-product",
+  volume: "contact-volume",
+  message: "contact-message",
+};
+
+const labelClass =
+  "block text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-1.5 font-semibold";
+const inputClass =
+  "w-full bg-alabaster/60 border border-border/80 rounded-xl px-4 py-3 text-sm text-foreground focus:border-gold focus:ring-1 focus:ring-gold/30 focus:outline-none transition-all placeholder:text-muted-foreground/50";
+
+type Failure = { code: SubmitErrorCode; retryable: boolean; retryAfterSeconds?: number };
+/** `unlocked`: a real (non-mock) provider-confirmed success from a visitor who did not fill the honeypot. */
+type Result = { reference: string; mock: boolean; unlocked: boolean };
+
+function readFields(form: HTMLFormElement, names: readonly string[]) {
+  const data = new FormData(form);
+  return Object.fromEntries(names.map((n) => [n, String(data.get(n) ?? "")]));
+}
+
+function Field({
+  name,
+  label,
+  required,
+  error,
+  hint,
+  children,
+}: {
+  name: (typeof CONTACT_FIELD_ORDER)[number];
+  label: string;
+  required?: boolean;
+  error?: string;
+  hint?: ReactNode;
+  children: (props: {
+    id: string;
+    name: string;
+    "aria-invalid": true | undefined;
+    "aria-describedby": string | undefined;
+  }) => ReactNode;
+}) {
+  const id = FIELD_IDS[name];
+  const describedBy = [hint ? `${id}-hint` : null, error ? `${id}-error` : null].filter(Boolean).join(" ") || undefined;
+  return (
+    <div>
+      <label htmlFor={id} className={labelClass}>
+        {label}
+        {required ? " *" : <span className="normal-case tracking-normal font-normal"> (optional)</span>}
+      </label>
+      {children({ id, name, "aria-invalid": error ? true : undefined, "aria-describedby": describedBy })}
+      {hint ? (
+        <p id={`${id}-hint`} className="mt-1 text-[11px] text-muted-foreground">
+          {hint}
+        </p>
+      ) : null}
+      {error ? (
+        <p id={`${id}-error`} className="mt-1.5 text-xs text-destructive">
+          {error}
+        </p>
+      ) : null}
+    </div>
+  );
+}
 
 export function Contact() {
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const { submit, busy, markStarted, reset } = useEnquirySubmission("contact");
+  const [result, setResult] = useState<Result | null>(null);
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [failure, setFailure] = useState<Failure | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [verifierStatus, setVerifierStatus] = useState<TurnstileStatus>("loading");
+  const [showVerifier, setShowVerifier] = useState(false);
+  const [messageLength, setMessageLength] = useState(0);
+  const formRef = useRef<HTMLFormElement>(null);
+  const turnstileRef = useRef<TurnstileHandle>(null);
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  // Load the security check only when the form approaches the viewport, so it never affects page load.
+  useEffect(() => {
+    const el = formRef.current;
+    if (!el || showVerifier) return;
+    if (!("IntersectionObserver" in window)) {
+      setShowVerifier(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShowVerifier(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "400px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [showVerifier, result]);
+
+  useEffect(() => {
+    if (result) successHeadingRef.current?.focus();
+  }, [result]);
+
+  function showFieldErrors(form: HTMLFormElement, fieldErrors: FieldErrors) {
+    // Render the errors first so the focused field is announced with its error.
+    flushSync(() => setErrors(fieldErrors));
+    const first = CONTACT_FIELD_ORDER.find((n) => fieldErrors[n]);
+    const el = first ? form.elements.namedItem(first) : null;
+    if (el instanceof HTMLElement) el.focus();
+    toast.error(first ? fieldErrors[first]! : "Please review the form fields.");
+  }
+
+  async function attempt(form: HTMLFormElement) {
+    if (busy) return;
+    markStarted();
+    const checked = validateContactFields(readFields(form, CONTACT_FIELD_ORDER));
+    if (!checked.ok) {
+      setFailure(null);
+      showFieldErrors(form, checked.fieldErrors);
+      return;
+    }
+    setErrors({});
+    if (turnstileSiteKey() && !token) {
+      // Never ask visitors to "complete" a challenge they cannot see.
+      setFailure(
+        verifierStatus === "error"
+          ? { code: "verification_load_failed", retryable: false }
+          : { code: "verification_loading", retryable: true },
+      );
+      return;
+    }
+    setFailure(null);
+    const honeypotInput = form.elements.namedItem(HONEYPOT_FIELD);
+    const honeypot = honeypotInput instanceof HTMLInputElement ? honeypotInput.value : "";
+    const outcome = await submit({
+      requestType: "contact",
+      fields: checked.data as unknown as Record<string, string>,
+      turnstileToken: token ?? "",
+      honeypot,
+    });
+    if (!outcome) return;
+    turnstileRef.current?.reset(); // tokens are single-use
+
+    if (outcome.kind === "success") {
+      // Only a real provider-confirmed acceptance opens the reports page: never a local mock success,
+      // and never when this browser filled the honeypot (the server's decoy looks like a success).
+      const unlocked = outcome.accepted && !outcome.mock && honeypot.trim() === "";
+      if (unlocked) grantDocAccess();
+      setResult({ reference: outcome.reference, mock: outcome.mock, unlocked });
+      form.reset();
+      setMessageLength(0);
+      reset();
+      toast.success(`Enquiry submitted. Reference ${outcome.reference}.`);
+      return;
+    }
+    if (outcome.code === "validation" && outcome.fieldErrors) showFieldErrors(form, outcome.fieldErrors);
+    setFailure({ code: outcome.code, retryable: outcome.retryable, retryAfterSeconds: outcome.retryAfterSeconds });
+  }
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
-    const parsed = schema.safeParse(data);
-    if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message ?? "Please review form fields");
-      return;
-    }
-    setSubmitting(true);
-    setTimeout(() => {
-      sessionStorage.setItem("kh_doc_access", "true");
-      setSubmitting(false);
-      setSubmitted(true);
-      form.reset();
-      toast.success("Thank you! Your trade inquiry has been submitted and compliance documents unlocked.");
-    }, 600);
+    void attempt(e.currentTarget);
+  }
+
+  function submitAnother() {
+    setResult(null);
+    setFailure(null);
+    setErrors({});
+    reset();
   }
 
   return (
@@ -108,25 +263,35 @@ export function Contact() {
           {/* Form Column (7 cols) */}
           <div className="lg:col-span-7">
             <div className="rounded-2xl border border-border/80 bg-card p-8 sm:p-10 shadow-xl">
-              {submitted ? (
-                <div className="text-center py-12">
+              {result ? (
+                <div className="text-center py-12" data-enquiry-success>
                   <div className="mx-auto w-16 h-16 rounded-full bg-forest/10 text-forest flex items-center justify-center mb-4">
-                    <CheckCircle2 className="w-10 h-10" />
+                    <CheckCircle2 className="w-10 h-10" aria-hidden="true" />
                   </div>
-                  <h3 className="font-serif text-3xl text-foreground">Inquiry Received & Access Unlocked!</h3>
+                  <h3 ref={successHeadingRef} tabIndex={-1} className="font-serif text-3xl text-foreground outline-none">
+                    Enquiry Submitted
+                  </h3>
                   <p className="text-sm text-muted-foreground mt-3 max-w-md mx-auto leading-relaxed">
-                    Thank you for reaching out. Our trade desk has received your request, and full access to our 5 official technical & compliance reports has been unlocked for your session.
+                    Thank you for contacting KH International. Your enquiry has been submitted.
                   </p>
+                  <p className="text-sm text-foreground mt-3">
+                    Your reference: <strong data-enquiry-reference>{result.reference}</strong>
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">Please quote this reference if you follow up.</p>
+                  {result.mock ? <MockModeNotice /> : null}
 
                   <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-                    <Link
-                      to="/reports"
-                      className="inline-flex items-center justify-center gap-2 border border-gold bg-gold text-white px-8 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-forest hover:border-forest transition-colors rounded-xl shadow-md"
-                    >
-                      <Unlock className="w-4 h-4" /> View Technical Reports (5 Files)
-                    </Link>
+                    {result.unlocked ? (
+                      <Link
+                        to="/reports"
+                        className="inline-flex items-center justify-center gap-2 border border-gold bg-gold text-white px-8 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-forest hover:border-forest transition-colors rounded-xl shadow-md"
+                      >
+                        <Unlock className="w-4 h-4" aria-hidden="true" /> View Technical Reports (5 Files)
+                      </Link>
+                    ) : null}
                     <button
-                      onClick={() => setSubmitted(false)}
+                      type="button"
+                      onClick={submitAnother}
                       className="border border-border text-foreground px-6 py-3 text-xs uppercase tracking-widest font-medium hover:bg-muted transition-colors rounded-xl"
                     >
                       Submit Another Inquiry
@@ -134,86 +299,122 @@ export function Contact() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={onSubmit} noValidate className="space-y-6">
+                <form
+                  ref={formRef}
+                  onSubmit={onSubmit}
+                  onFocusCapture={() => {
+                    markStarted();
+                    setShowVerifier(true);
+                  }}
+                  noValidate
+                  aria-busy={busy || undefined}
+                  className="space-y-6"
+                >
                   <div className="border-b border-border/60 pb-4 mb-6">
                     <h3 className="font-serif text-2xl text-foreground">Trade Inquiry & Sample Request Form</h3>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Please complete the fields below to connect directly with our trade desk.
+                      Please complete the fields below to connect directly with our trade desk. Fields marked * are required.
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-1.5 font-semibold">
-                        Name / Company Name *
-                      </label>
-                      <input
-                        name="name"
-                        type="text"
-                        required
-                        placeholder="e.g. Marie Laurent / Parfums SA"
-                        className="w-full bg-alabaster/60 border border-border/80 rounded-xl px-4 py-3 text-sm text-foreground focus:border-gold focus:ring-1 focus:ring-gold/30 focus:outline-none transition-all placeholder:text-muted-foreground/50"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-1.5 font-semibold">
-                        Country *
-                      </label>
-                      <input
-                        name="country"
-                        type="text"
-                        required
-                        placeholder="e.g. France / Canada / USA"
-                        className="w-full bg-alabaster/60 border border-border/80 rounded-xl px-4 py-3 text-sm text-foreground focus:border-gold focus:ring-1 focus:ring-gold/30 focus:outline-none transition-all placeholder:text-muted-foreground/50"
-                      />
-                    </div>
+                    <Field name="fullName" label="Full Name" required error={errors.fullName}>
+                      {(p) => (
+                        <input {...p} type="text" required autoComplete="name" maxLength={LIMITS.fullName.max} placeholder="e.g. Marie Laurent" className={inputClass} />
+                      )}
+                    </Field>
+                    <Field name="company" label="Company Name" required error={errors.company}>
+                      {(p) => (
+                        <input {...p} type="text" required autoComplete="organization" maxLength={LIMITS.company.max} placeholder="e.g. Parfums SA" className={inputClass} />
+                      )}
+                    </Field>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-1.5 font-semibold">
-                        Product of Interest
-                      </label>
-                      <input
-                        name="product"
-                        type="text"
-                        placeholder="e.g. Bulk Vetriver Oil / 100g Sample"
-                        className="w-full bg-alabaster/60 border border-border/80 rounded-xl px-4 py-3 text-sm text-foreground focus:border-gold focus:ring-1 focus:ring-gold/30 focus:outline-none transition-all placeholder:text-muted-foreground/50"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-1.5 font-semibold">
-                        Estimated Order Volume
-                      </label>
-                      <input
-                        name="volume"
-                        type="text"
-                        placeholder="e.g. 25 kg Drum / 5 kg Trial"
-                        className="w-full bg-alabaster/60 border border-border/80 rounded-xl px-4 py-3 text-sm text-foreground focus:border-gold focus:ring-1 focus:ring-gold/30 focus:outline-none transition-all placeholder:text-muted-foreground/50"
-                      />
-                    </div>
+                    <Field name="email" label="Business Email" required error={errors.email}>
+                      {(p) => (
+                        <input {...p} type="email" required autoComplete="email" inputMode="email" maxLength={LIMITS.email.max} placeholder="e.g. marie@parfums.fr" className={inputClass} />
+                      )}
+                    </Field>
+                    <Field name="country" label="Country" required error={errors.country}>
+                      {(p) => (
+                        <input {...p} type="text" required autoComplete="country-name" maxLength={LIMITS.country.max} placeholder="e.g. France / Canada / USA" className={inputClass} />
+                      )}
+                    </Field>
                   </div>
 
-                  <div>
-                    <label className="block text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-1.5 font-semibold">
-                      Message
-                    </label>
-                    <input
-                      name="message"
-                      type="text"
-                      placeholder="e.g. Target delivery date, Incoterms, or specifications"
-                      className="w-full bg-alabaster/60 border border-border/80 rounded-xl px-4 py-3 text-sm text-foreground focus:border-gold focus:ring-1 focus:ring-gold/30 focus:outline-none transition-all placeholder:text-muted-foreground/50"
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <Field name="phone" label="Phone / WhatsApp" error={errors.phone}>
+                      {(p) => (
+                        <input {...p} type="tel" autoComplete="tel" maxLength={LIMITS.phone.max} placeholder="e.g. +33 1 23 45 67 89" className={inputClass} />
+                      )}
+                    </Field>
+                    <Field name="product" label="Product of Interest" error={errors.product}>
+                      {(p) => (
+                        <input {...p} type="text" maxLength={LIMITS.product.max} placeholder="e.g. Bulk Vetriver Oil" className={inputClass} />
+                      )}
+                    </Field>
+                    <Field name="volume" label="Estimated Order Volume" error={errors.volume}>
+                      {(p) => (
+                        <input {...p} type="text" maxLength={LIMITS.volume.max} placeholder="e.g. 25 kg Drum" className={inputClass} />
+                      )}
+                    </Field>
                   </div>
+
+                  <Field
+                    name="message"
+                    label="Enquiry Message"
+                    required
+                    error={errors.message}
+                    hint={`${messageLength} / ${LIMITS.message.max} characters (minimum ${LIMITS.message.min})`}
+                  >
+                    {(p) => (
+                      <textarea
+                        {...p}
+                        required
+                        rows={5}
+                        maxLength={LIMITS.message.max}
+                        onChange={(e) => setMessageLength(e.currentTarget.value.length)}
+                        placeholder="e.g. Target delivery date, destination port, Incoterms or specifications"
+                        className={`${inputClass} resize-y`}
+                      />
+                    )}
+                  </Field>
+
+                  {/* Honeypot: hidden from people and assistive technology; bots that fill it get a decoy response. */}
+                  <div aria-hidden="true" className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden">
+                    <label htmlFor="contact-kh-ref">Leave this field empty</label>
+                    <input id="contact-kh-ref" name={HONEYPOT_FIELD} type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+                  </div>
+
+                  {showVerifier ? (
+                    <TurnstileWidget
+                      ref={turnstileRef}
+                      action="contact"
+                      onToken={setToken}
+                      onStatusChange={setVerifierStatus}
+                    />
+                  ) : null}
+
+                  {failure ? (
+                    <EnquiryErrorNotice
+                      id="contact-form-error"
+                      code={failure.code}
+                      retryable={failure.retryable}
+                      retryAfterSeconds={failure.retryAfterSeconds}
+                      busy={busy}
+                      onRetry={() => formRef.current && void attempt(formRef.current)}
+                    />
+                  ) : null}
 
                   <div className="pt-4 flex flex-wrap gap-4 items-center">
                     <button
                       type="submit"
-                      disabled={submitting}
+                      disabled={busy}
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-gold bg-gold px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-white hover:bg-forest hover:border-forest transition-colors rounded-xl disabled:opacity-60 shadow-md"
                     >
-                      <Send className="w-4 h-4" />
-                      {submitting ? "Sending..." : "Submit Trade Inquiry"}
+                      <Send className="w-4 h-4" aria-hidden="true" />
+                      {busy ? "Sending..." : "Submit Trade Inquiry"}
                     </button>
                   </div>
                 </form>

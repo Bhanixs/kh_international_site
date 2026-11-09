@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { Logo } from "./Logo";
 import { Menu, X, ChevronRight, Globe2 } from "lucide-react";
 
 interface NavProps {
   onOpenSampleModal?: (type?: "sample" | "partner" | "gcms") => void;
+  menuButtonRef?: RefObject<HTMLButtonElement | null>;
 }
 
 const navLinks = [
@@ -14,11 +15,32 @@ const navLinks = [
   { href: "#sustainability", label: "Sustainability" },
   { href: "#markets", label: "Global Trade" },
   { href: "#quality", label: "Compliance" },
-  { href: "#farmers", label: "Farmers (தமிழ்)", isBadge: true },
+  {
+    href: "#farmers",
+    label: (
+      <>
+        Farmers (<span lang="ta">தமிழ்</span>)
+      </>
+    ),
+    isBadge: true,
+  },
 ];
 
-export function Nav({ onOpenSampleModal }: NavProps) {
+export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const localMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const toggleRef = menuButtonRef ?? localMenuButtonRef;
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setMobileOpen(false);
+      toggleRef.current?.focus();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen, toggleRef]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur-md transition-all">
@@ -37,7 +59,7 @@ export function Nav({ onOpenSampleModal }: NavProps) {
         </a>
 
         {/* Desktop Navigation Links (Spacious layout with xl breakpoint for clean fit) */}
-        <nav className="hidden items-center gap-3 xl:gap-5 2xl:gap-6 text-[11px] font-medium tracking-wider text-muted-foreground uppercase xl:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-3 xl:gap-5 2xl:gap-6 text-[11px] font-medium tracking-wider text-muted-foreground uppercase xl:flex">
           {navLinks.map((l) =>
             l.isBadge ? (
               <a
@@ -61,17 +83,28 @@ export function Nav({ onOpenSampleModal }: NavProps) {
 
         {/* Action Button & Mobile / Tablet Toggle */}
         <div className="flex items-center gap-3 shrink-0">
+          {/* Opens the sample request dialog; without JavaScript it still links to the contact form. */}
           <a
             href="#contact"
+            aria-haspopup={onOpenSampleModal ? "dialog" : undefined}
+            data-open-sample-modal
+            onClick={(event) => {
+              if (!onOpenSampleModal) return;
+              event.preventDefault();
+              onOpenSampleModal("sample");
+            }}
             className="hidden sm:inline-flex items-center justify-center border border-gold bg-gold px-4 sm:px-5 py-2.5 text-[11px] font-medium tracking-[0.16em] text-white uppercase transition-all hover:bg-forest hover:border-forest shadow-sm whitespace-nowrap"
           >
             Request Sample
           </a>
 
           <button
+            ref={toggleRef}
             onClick={() => setMobileOpen(!mobileOpen)}
             className="xl:hidden p-2 text-foreground hover:text-forest transition-colors"
             aria-label="Toggle Navigation Menu"
+            aria-expanded={mobileOpen}
+            aria-controls={mobileOpen ? "mobile-navigation" : undefined}
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -80,8 +113,8 @@ export function Nav({ onOpenSampleModal }: NavProps) {
 
       {/* Mobile & Tablet Drawer */}
       {mobileOpen && (
-        <div className="xl:hidden border-t border-border bg-background px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-200 shadow-xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div id="mobile-navigation" className="xl:hidden border-t border-border bg-background px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-200 shadow-xl">
+          <nav aria-label="Mobile" className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {navLinks.map((l) => (
               <a
                 key={l.href}
@@ -97,7 +130,7 @@ export function Nav({ onOpenSampleModal }: NavProps) {
                 <ChevronRight className="w-3.5 h-3.5 opacity-60" />
               </a>
             ))}
-          </div>
+          </nav>
 
           <div className="pt-4 border-t border-border/60 flex flex-col sm:flex-row gap-3">
             <a

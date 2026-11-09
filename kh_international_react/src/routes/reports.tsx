@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SampleModal } from "@/components/kh/SampleModal";
+import { hasDocAccess } from "@/lib/doc-access";
 import { Logo } from "@/components/kh/Logo";
 import {
   FileText,
@@ -28,7 +29,9 @@ export const Route = createFileRoute("/reports")({
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
+      { property: "og:url", content: "https://www.khinternational.org.in/reports" },
     ],
+    links: [{ rel: "canonical", href: "https://www.khinternational.org.in/reports" }],
   }),
   component: ReportsPage,
 });
@@ -94,11 +97,12 @@ function ReportsPage() {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"sample" | "partner" | "gcms">("gcms");
+  // The unlock button disappears after a successful request, so focus returns to the page heading.
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    // Check if user has submitted the form
-    const hasAccess = sessionStorage.getItem("kh_doc_access") === "true";
-    if (hasAccess) {
+    // Check if user has submitted the form (a session flag, not access control).
+    if (hasDocAccess()) {
       setIsUnlocked(true);
     }
   }, []);
@@ -134,11 +138,11 @@ function ReportsPage() {
             </div>
             <div className="flex gap-3 items-center">
               <Logo></Logo>
-              <h1 className="font-serif text-4xl sm:text-5xl leading-tight text-foreground">
+              <p className="font-serif text-4xl sm:text-5xl leading-tight text-foreground">
                 KH International
-              </h1>
+              </p>
             </div>
-            <h1 className="font-serif text-4xl sm:text-5xl leading-tight text-foreground">
+            <h1 ref={headingRef} tabIndex={-1} className="font-serif text-4xl sm:text-5xl leading-tight text-foreground outline-none">
               Compliance & Quality Reports Portal
             </h1>
             <p className="mt-4 text-base text-muted-foreground leading-relaxed font-light">
@@ -223,6 +227,9 @@ function ReportsPage() {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         defaultType={modalType}
+        returnFocusRef={headingRef}
+        // Update the page immediately after a confirmed request, without a reload.
+        onSubmitted={() => setIsUnlocked(true)}
       />
     </div>
   );

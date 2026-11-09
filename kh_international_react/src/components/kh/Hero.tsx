@@ -1,4 +1,4 @@
-import heroImg from "@/assets/hero-image.jpeg";
+import heroImg from "@/assets/optimized/hero-774-q85.webp";
 import { Award, Globe, Users, ShieldCheck, ArrowRight, FileCheck2, ExternalLink, FileText } from "lucide-react";
 
 interface HeroProps {
@@ -72,8 +72,9 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
             <img
               src={heroImg}
               alt="Golden steam-distilled vetriver essential oil droplet with botanical root detail"
-              width={1200}
-              height={1500}
+              width={774}
+              height={889}
+              fetchPriority="high"
               className="h-[480px] w-full object-cover lg:h-[580px] transition-transform duration-700 hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-8 text-white">

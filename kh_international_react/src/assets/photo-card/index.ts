@@ -1,8 +1,8 @@
-import img1 from "./01.jpeg";
-import img2 from "./02.jpeg";
-import img3 from "./03.jpeg";
-import img4 from "./04.jpeg";
-import img5 from "./05.jpeg";
-import img6 from "./06.jpeg";
+import img1 from "../optimized/card01-h320-q80.webp";
+import img2 from "../optimized/card02-h320-q80.webp";
+import img3 from "../optimized/card03-h320-q80.webp";
+import img4 from "../optimized/card04-h320-q80.webp";
+import img5 from "../optimized/card05-h320-q85.webp";
+import img6 from "../optimized/card06-h320-q80.webp";
 
 export { img1, img2, img3, img4, img5, img6 };
