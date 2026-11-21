@@ -1,30 +1,12 @@
 import aboutImg from "@/assets/optimized/about-576-q80.webp";
-import { Info, CheckCircle2, ShieldCheck } from "lucide-react";
 
-const stats = [
-  {
-    value: "2012",
-    label: "Founded",
-    detail: "Over a decade of continuous operation in Villupuram, Tamil Nadu",
-  },
-  {
-    value: "500+",
-    label: "Women in Farming",
-    detail: "Directly empowered in regenerative vetriver cultivation",
-  },
-  {
-    value: "100+",
-    label: "Acres Cultivated",
-    detail: "Partner farmland under low-water, soil-restoring agriculture",
-  },
-  {
-    value: "400+",
-    label: "Women in Craft",
-    detail: "Artisans handweaving mats, screens & root fragrance products",
-  },
-];
+interface AboutProps {
+  asH1?: boolean;
+}
 
-export function About() {
+export function About({ asH1 = false }: AboutProps) {
+  const HeadingTag = asH1 ? "h1" : "h2";
+
   return (
     <section id="about" className="border-b border-border/60 bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -56,11 +38,11 @@ export function About() {
           {/* Story & Copy Content */}
           <div className="flex flex-col justify-center">
             <span className="mb-4 text-[11px] tracking-[0.3em] font-semibold text-gold uppercase">
-              Our Story · Page 2
+              About Us · Overview
             </span>
-            <h2 className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl font-normal">
+            <HeadingTag className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl font-normal">
               About KH International
-            </h2>
+            </HeadingTag>
 
             <div className="mt-6 space-y-6 text-base leading-relaxed text-muted-foreground font-light">
               <p>

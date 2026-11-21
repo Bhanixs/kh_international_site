@@ -1,13 +1,6 @@
 import { useRef, useState } from "react";
 import { Nav } from "./Nav";
 import { Hero } from "./Hero";
-import { About } from "./About";
-import { Product } from "./Product";
-import { WhyKH } from "./WhyKH";
-import { Sustainability } from "./Sustainability";
-import { MarketsFrance } from "./MarketsFrance";
-import { Quality } from "./Quality";
-import { FarmersSection } from "./FarmersSection";
 import { Contact } from "./Contact";
 import { Footer } from "./Footer";
 import { SampleModal } from "./SampleModal";
@@ -33,31 +26,7 @@ export function KHLanding() {
       </a>
       <Nav onOpenSampleModal={handleOpenModal} menuButtonRef={menuButtonRef} />
       <main id="main-content" tabIndex={-1} className="outline-none">
-        {/* Page 1 — Home */}
         <Hero onOpenSampleModal={handleOpenModal} />
-
-        {/* Page 2 — About KH International / Our Story */}
-        <About />
-
-        {/* Page 3 — Our Vetriver Oil */}
-        <Product onOpenSampleModal={handleOpenModal} />
-
-        {/* Page 4 — Why India, Why KH International */}
-        <WhyKH />
-
-        {/* Page 5 — Sustainability & Farmer Partnerships */}
-        <Sustainability />
-
-        {/* Page 6 — Global Trade & Partnerships (France-Facing & Export) */}
-        <MarketsFrance onOpenSampleModal={handleOpenModal} />
-
-        {/* Page 7 — Global Standards & Compliance */}
-        <Quality />
-
-        {/* Dedicated Farmers Section (Tamil & English) */}
-        <FarmersSection />
-
-        {/* Page 8 — Contact / Trade Inquiry */}
         <Contact />
       </main>
       <Footer />

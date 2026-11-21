@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { Sprout, HeartHandshake, Shield, Sparkles, PhoneCall, CheckCircle } from "lucide-react";
 
-export function FarmersSection() {
+interface FarmersSectionProps {
+  asH1?: boolean;
+}
+
+export function FarmersSection({ asH1 = false }: FarmersSectionProps) {
   const [lang, setLang] = useState<"ta" | "en">("en");
   const textLang = lang === "ta" ? "ta" : undefined;
+  const HeadingTag = asH1 ? "h1" : "h2";
 
   return (
     <section id="farmers" className="border-t border-b border-border/60 bg-alabaster py-20 lg:py-28">
@@ -13,11 +18,11 @@ export function FarmersSection() {
             <span className="text-[11px] tracking-[0.3em] text-forest uppercase font-semibold block mb-2">
               Livelihoods & Farmer Recruitment · Tamil Nadu
             </span>
-            <h2 lang={textLang} className="font-serif text-3xl leading-tight text-foreground sm:text-4xl lg:text-5xl">
+            <HeadingTag lang={textLang} className="font-serif text-3xl leading-tight text-foreground sm:text-4xl lg:text-5xl">
               {lang === "en"
                 ? "For Partner Farmers & Women Artisans"
                 : "வெட்டிவேர் விவசாயிகள் மற்றும் கைவினைஞர்கள் சேர்க்கை"}
-            </h2>
+            </HeadingTag>
             <p lang={textLang} className="mt-4 text-base text-muted-foreground leading-relaxed">
               {lang === "en"
                 ? "Empowering local agriculture through low-water vetriver farming and handwoven root craft. Building stable, dignified income across Villupuram district."

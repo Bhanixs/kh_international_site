@@ -7,6 +7,7 @@ import graph from "@/assets/optimized/graph-976-lossless.webp";
 
 interface MarketsFranceProps {
   onOpenSampleModal?: (type?: "sample" | "partner" | "gcms") => void;
+  asH1?: boolean;
 }
 
 const stepsEN = [
@@ -23,8 +24,9 @@ const stepsFR = [
   { step: "04", desc: "Passer à un accord d'approvisionnement à long terme avec des volumes et des prix convenus." },
 ];
 
-export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
+export function MarketsFrance({ onOpenSampleModal, asH1 = false }: MarketsFranceProps) {
   const [lang, setLang] = useState<"en" | "fr">("en");
+  const HeadingTag = asH1 ? "h1" : "h2";
 
   const steps = lang === "en" ? stepsEN : stepsFR;
   const textLang = lang === "fr" ? "fr" : undefined;
@@ -90,11 +92,11 @@ export function MarketsFrance({ onOpenSampleModal }: MarketsFranceProps) {
               </div>
             </div>
 
-            <h2 lang={textLang} className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl font-normal">
+            <HeadingTag lang={textLang} className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl font-normal">
               {lang === "en"
                 ? "A Proven Export Supply Chain — Now Open to France and Europe"
                 : "Un Réseau d'Approvisionnement Éprouvé — Ouvert à la France et à l'Europe"}
-            </h2>
+            </HeadingTag>
 
             <div lang={textLang} className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground font-light">
               <p>

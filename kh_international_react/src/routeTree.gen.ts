@@ -10,7 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutUsRouteImport } from './routes/about-us'
+import { Route as ComplianceRouteImport } from './routes/compliance'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FarmersRouteImport } from './routes/farmers'
+import { Route as GlobalTradeRouteImport } from './routes/global-trade'
 import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SustainabilityRouteImport } from './routes/sustainability'
+import { Route as VetiverOilRouteImport } from './routes/vetiver-oil'
+import { Route as WhyKhRouteImport } from './routes/why-kh'
 import { Route as ApiEnquiryRouteImport } from './routes/api/enquiry'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +26,49 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutUsRoute = AboutUsRouteImport.update({
+  id: '/about-us',
+  path: '/about-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComplianceRoute = ComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmersRoute = FarmersRouteImport.update({
+  id: '/farmers',
+  path: '/farmers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlobalTradeRoute = GlobalTradeRouteImport.update({
+  id: '/global-trade',
+  path: '/global-trade',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReportsRoute = ReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SustainabilityRoute = SustainabilityRouteImport.update({
+  id: '/sustainability',
+  path: '/sustainability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VetiverOilRoute = VetiverOilRouteImport.update({
+  id: '/vetiver-oil',
+  path: '/vetiver-oil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhyKhRoute = WhyKhRouteImport.update({
+  id: '/why-kh',
+  path: '/why-kh',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiEnquiryRoute = ApiEnquiryRouteImport.update({
@@ -31,31 +79,97 @@ const ApiEnquiryRoute = ApiEnquiryRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about-us': typeof AboutUsRoute
+  '/compliance': typeof ComplianceRoute
+  '/contact': typeof ContactRoute
+  '/farmers': typeof FarmersRoute
+  '/global-trade': typeof GlobalTradeRoute
   '/reports': typeof ReportsRoute
+  '/sustainability': typeof SustainabilityRoute
+  '/vetiver-oil': typeof VetiverOilRoute
+  '/why-kh': typeof WhyKhRoute
   '/api/enquiry': typeof ApiEnquiryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about-us': typeof AboutUsRoute
+  '/compliance': typeof ComplianceRoute
+  '/contact': typeof ContactRoute
+  '/farmers': typeof FarmersRoute
+  '/global-trade': typeof GlobalTradeRoute
   '/reports': typeof ReportsRoute
+  '/sustainability': typeof SustainabilityRoute
+  '/vetiver-oil': typeof VetiverOilRoute
+  '/why-kh': typeof WhyKhRoute
   '/api/enquiry': typeof ApiEnquiryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about-us': typeof AboutUsRoute
+  '/compliance': typeof ComplianceRoute
+  '/contact': typeof ContactRoute
+  '/farmers': typeof FarmersRoute
+  '/global-trade': typeof GlobalTradeRoute
   '/reports': typeof ReportsRoute
+  '/sustainability': typeof SustainabilityRoute
+  '/vetiver-oil': typeof VetiverOilRoute
+  '/why-kh': typeof WhyKhRoute
   '/api/enquiry': typeof ApiEnquiryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/reports' | '/api/enquiry'
+  fullPaths:
+    | '/'
+    | '/about-us'
+    | '/compliance'
+    | '/contact'
+    | '/farmers'
+    | '/global-trade'
+    | '/reports'
+    | '/sustainability'
+    | '/vetiver-oil'
+    | '/why-kh'
+    | '/api/enquiry'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/reports' | '/api/enquiry'
-  id: '__root__' | '/' | '/reports' | '/api/enquiry'
+  to:
+    | '/'
+    | '/about-us'
+    | '/compliance'
+    | '/contact'
+    | '/farmers'
+    | '/global-trade'
+    | '/reports'
+    | '/sustainability'
+    | '/vetiver-oil'
+    | '/why-kh'
+    | '/api/enquiry'
+  id:
+    | '__root__'
+    | '/'
+    | '/about-us'
+    | '/compliance'
+    | '/contact'
+    | '/farmers'
+    | '/global-trade'
+    | '/reports'
+    | '/sustainability'
+    | '/vetiver-oil'
+    | '/why-kh'
+    | '/api/enquiry'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutUsRoute: typeof AboutUsRoute
+  ComplianceRoute: typeof ComplianceRoute
+  ContactRoute: typeof ContactRoute
+  FarmersRoute: typeof FarmersRoute
+  GlobalTradeRoute: typeof GlobalTradeRoute
   ReportsRoute: typeof ReportsRoute
+  SustainabilityRoute: typeof SustainabilityRoute
+  VetiverOilRoute: typeof VetiverOilRoute
+  WhyKhRoute: typeof WhyKhRoute
   ApiEnquiryRoute: typeof ApiEnquiryRoute
 }
 
@@ -68,11 +182,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about-us': {
+      id: '/about-us'
+      path: '/about-us'
+      fullPath: '/about-us'
+      preLoaderRoute: typeof AboutUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compliance': {
+      id: '/compliance'
+      path: '/compliance'
+      fullPath: '/compliance'
+      preLoaderRoute: typeof ComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farmers': {
+      id: '/farmers'
+      path: '/farmers'
+      fullPath: '/farmers'
+      preLoaderRoute: typeof FarmersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/global-trade': {
+      id: '/global-trade'
+      path: '/global-trade'
+      fullPath: '/global-trade'
+      preLoaderRoute: typeof GlobalTradeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reports': {
       id: '/reports'
       path: '/reports'
       fullPath: '/reports'
       preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sustainability': {
+      id: '/sustainability'
+      path: '/sustainability'
+      fullPath: '/sustainability'
+      preLoaderRoute: typeof SustainabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vetiver-oil': {
+      id: '/vetiver-oil'
+      path: '/vetiver-oil'
+      fullPath: '/vetiver-oil'
+      preLoaderRoute: typeof VetiverOilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/why-kh': {
+      id: '/why-kh'
+      path: '/why-kh'
+      fullPath: '/why-kh'
+      preLoaderRoute: typeof WhyKhRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/enquiry': {
@@ -87,7 +257,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutUsRoute: AboutUsRoute,
+  ComplianceRoute: ComplianceRoute,
+  ContactRoute: ContactRoute,
+  FarmersRoute: FarmersRoute,
+  GlobalTradeRoute: GlobalTradeRoute,
   ReportsRoute: ReportsRoute,
+  SustainabilityRoute: SustainabilityRoute,
+  VetiverOilRoute: VetiverOilRoute,
+  WhyKhRoute: WhyKhRoute,
   ApiEnquiryRoute: ApiEnquiryRoute,
 }
 export const routeTree = rootRouteImport

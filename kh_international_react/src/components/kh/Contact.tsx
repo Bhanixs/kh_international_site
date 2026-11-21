@@ -84,7 +84,12 @@ function Field({
   );
 }
 
-export function Contact() {
+interface ContactProps {
+  asH1?: boolean;
+}
+
+export function Contact({ asH1 = false }: ContactProps) {
+  const HeadingTag = asH1 ? "h1" : "h2";
   const { submit, busy, markStarted, reset } = useEnquirySubmission("contact");
   const [result, setResult] = useState<Result | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -198,11 +203,11 @@ export function Contact() {
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               <span className="text-[11px] tracking-[0.3em] font-semibold text-gold uppercase block mb-2">
-                Trade Desk & Inquiries · Page 8
+                Trade Desk & Inquiries · Contact
               </span>
-              <h2 className="font-serif text-4xl leading-tight text-foreground sm:text-5xl font-normal">
+              <HeadingTag className="font-serif text-4xl leading-tight text-foreground sm:text-5xl font-normal">
                 Contact KH International
-              </h2>
+              </HeadingTag>
               <p className="mt-4 text-sm text-muted-foreground leading-relaxed font-light">
                 Direct export inquiries, sample vial dispatch requests, and commercial terms alignment with our sales desk.
               </p>

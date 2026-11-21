@@ -1,22 +1,29 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Logo } from "./Logo";
-import { Menu, X, ChevronRight, Globe2 } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
 
 interface NavProps {
   onOpenSampleModal?: (type?: "sample" | "partner" | "gcms") => void;
   menuButtonRef?: RefObject<HTMLButtonElement | null>;
 }
 
-const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "Story" },
-  { href: "#product", label: "Vetriver Oil" },
-  { href: "#why-kh", label: "Why KH" },
-  { href: "#sustainability", label: "Sustainability" },
-  { href: "#markets", label: "Global Trade" },
-  { href: "#quality", label: "Compliance" },
+interface NavLinkItem {
+  to: string;
+  label: React.ReactNode;
+  isBadge?: boolean;
+}
+
+const navLinks: NavLinkItem[] = [
+  { to: "/", label: "Home" },
+  { to: "/about-us", label: "About Us" },
+  { to: "/vetiver-oil", label: "Vetriver Oil" },
+  { to: "/why-kh", label: "Why KH" },
+  { to: "/sustainability", label: "Sustainability" },
+  { to: "/global-trade", label: "Global Trade" },
+  { to: "/compliance", label: "Compliance" },
   {
-    href: "#farmers",
+    to: "/farmers",
     label: (
       <>
         Farmers (<span lang="ta">தமிழ்</span>)
@@ -30,6 +37,9 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const localMenuButtonRef = useRef<HTMLButtonElement>(null);
   const toggleRef = menuButtonRef ?? localMenuButtonRef;
+
+  const routerState = useRouterState();
+  const currentPath = routerState.location.pathname;
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -46,7 +56,7 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur-md transition-all">
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
         {/* Brand Logo & Title */}
-        <a href="#home" className="flex items-center gap-3 shrink-0 group">
+        <Link to="/" className="flex items-center gap-3 shrink-0 group">
           <Logo className="h-12 sm:h-14 w-auto transition-transform group-hover:scale-105" />
           <div className="flex flex-col">
             <span className="font-serif text-lg sm:text-xl tracking-tight text-foreground font-semibold leading-none">
@@ -56,47 +66,54 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
               Tamil Nadu · South India
             </span>
           </div>
-        </a>
+        </Link>
 
-        {/* Desktop Navigation Links (Spacious layout with xl breakpoint for clean fit) */}
+        {/* Desktop Navigation Links */}
         <nav aria-label="Primary" className="hidden items-center gap-3 xl:gap-5 2xl:gap-6 text-[11px] font-medium tracking-wider text-muted-foreground uppercase xl:flex">
-          {navLinks.map((l) =>
-            l.isBadge ? (
-              <a
-                key={l.href}
-                href={l.href}
-                className="inline-flex items-center gap-1 border border-gold/40 bg-gold/5 px-2.5 py-1 rounded-full text-gold hover:bg-gold hover:text-white transition-all text-[10.5px] font-semibold"
+          {navLinks.map((l) => {
+            const isActive = currentPath === l.to;
+            return l.isBadge ? (
+              <Link
+                key={l.to}
+                to={l.to}
+                className={`inline-flex items-center gap-1 border border-gold/40 px-2.5 py-1 rounded-full transition-all text-[10.5px] font-semibold ${
+                  isActive
+                    ? "bg-gold text-white"
+                    : "bg-gold/5 text-gold hover:bg-gold hover:text-white"
+                }`}
               >
                 <span>{l.label}</span>
-              </a>
+              </Link>
             ) : (
-              <a
-                key={l.href}
-                href={l.href}
-                className="transition-colors hover:text-forest py-1 border-b-2 border-transparent hover:border-gold whitespace-nowrap"
+              <Link
+                key={l.to}
+                to={l.to}
+                className={`transition-colors py-1 border-b-2 whitespace-nowrap ${
+                  isActive
+                    ? "text-forest border-gold font-semibold"
+                    : "hover:text-forest border-transparent hover:border-gold"
+                }`}
               >
                 {l.label}
-              </a>
-            )
-          )}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Action Button & Mobile / Tablet Toggle */}
         <div className="flex items-center gap-3 shrink-0">
-          {/* Opens the sample request dialog; without JavaScript it still links to the contact form. */}
-          <a
-            href="#contact"
-            aria-haspopup={onOpenSampleModal ? "dialog" : undefined}
-            data-open-sample-modal
-            onClick={(event) => {
-              if (!onOpenSampleModal) return;
-              event.preventDefault();
-              onOpenSampleModal("sample");
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            onClick={() => {
+              if (onOpenSampleModal) {
+                onOpenSampleModal("sample");
+              }
             }}
-            className="hidden sm:inline-flex items-center justify-center border border-gold bg-gold px-4 sm:px-5 py-2.5 text-[11px] font-medium tracking-[0.16em] text-white uppercase transition-all hover:bg-forest hover:border-forest shadow-sm whitespace-nowrap"
+            className="hidden sm:inline-flex items-center justify-center border border-gold bg-gold px-4 sm:px-5 py-2.5 text-[11px] font-medium tracking-[0.16em] text-white uppercase transition-all hover:bg-forest hover:border-forest shadow-sm whitespace-nowrap cursor-pointer"
           >
             Request Sample
-          </a>
+          </button>
 
           <button
             ref={toggleRef}
@@ -115,37 +132,45 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
       {mobileOpen && (
         <div id="mobile-navigation" className="xl:hidden border-t border-border bg-background px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-200 shadow-xl">
           <nav aria-label="Mobile" className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setMobileOpen(false)}
-                className={`text-xs uppercase tracking-wider font-medium py-2 px-3 rounded-lg border transition-colors flex items-center justify-between ${
-                  l.isBadge
-                    ? "border-gold/50 bg-gold/10 text-gold font-bold"
-                    : "border-border/60 text-foreground hover:bg-alabaster hover:text-forest"
-                }`}
-              >
-                <span>{l.label}</span>
-                <ChevronRight className="w-3.5 h-3.5 opacity-60" />
-              </a>
-            ))}
+            {navLinks.map((l) => {
+              const isActive = currentPath === l.to;
+              return (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  onClick={() => setMobileOpen(false)}
+                  className={`text-xs uppercase tracking-wider font-medium py-2 px-3 rounded-lg border transition-colors flex items-center justify-between ${
+                    l.isBadge
+                      ? isActive
+                        ? "border-gold bg-gold text-white font-bold"
+                        : "border-gold/50 bg-gold/10 text-gold font-bold"
+                      : isActive
+                        ? "border-forest bg-forest/10 text-forest font-semibold"
+                        : "border-border/60 text-foreground hover:bg-alabaster hover:text-forest"
+                  }`}
+                >
+                  <span>{l.label}</span>
+                  <ChevronRight className="w-3.5 h-3.5 opacity-60" />
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="pt-4 border-t border-border/60 flex flex-col sm:flex-row gap-3">
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               onClick={() => setMobileOpen(false)}
               className="w-full text-center border border-gold bg-gold py-3 text-xs font-semibold uppercase tracking-widest text-white hover:bg-forest transition-colors shadow-sm"
             >
               Request Sample Vial (100g)
-            </a>
+            </Link>
             <button
+              type="button"
               onClick={() => {
                 setMobileOpen(false);
                 onOpenSampleModal?.("gcms");
               }}
-              className="w-full text-center border border-border py-3 text-xs font-semibold uppercase tracking-widest text-foreground hover:bg-alabaster transition-colors"
+              className="w-full text-center border border-border py-3 text-xs font-semibold uppercase tracking-widest text-foreground hover:bg-alabaster transition-colors cursor-pointer"
             >
               Download GC-MS Report
             </button>

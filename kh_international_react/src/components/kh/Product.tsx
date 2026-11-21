@@ -3,6 +3,7 @@ import { Sparkles, FileSpreadsheet } from "lucide-react";
 
 interface ProductProps {
   onOpenSampleModal?: (type?: "sample" | "partner" | "gcms") => void;
+  asH1?: boolean;
 }
 
 const applications = [
@@ -28,7 +29,9 @@ const applications = [
   },
 ];
 
-export function Product({ onOpenSampleModal }: ProductProps) {
+export function Product({ onOpenSampleModal, asH1 = false }: ProductProps) {
+  const HeadingTag = asH1 ? "h1" : "h2";
+
   return (
     <section id="product" className="border-b border-border/60 bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -36,11 +39,11 @@ export function Product({ onOpenSampleModal }: ProductProps) {
           {/* Left Column Text */}
           <div>
             <span className="mb-4 text-[11px] tracking-[0.3em] font-semibold text-gold uppercase block">
-              The Product · Page 3
+              The Product · Overview
             </span>
-            <h2 className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl font-normal">
+            <HeadingTag className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl font-normal">
               Our Vetriver Oil
-            </h2>
+            </HeadingTag>
             <p className="mt-4 text-xs font-mono text-forest uppercase tracking-widest bg-forest/10 px-3 py-1.5 rounded-md inline-block">
               Botanical Name: Chrysopogon zizanioides (syn. Vetriveria zizanioides)
             </p>

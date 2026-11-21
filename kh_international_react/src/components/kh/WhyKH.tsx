@@ -1,16 +1,22 @@
 import { ShieldCheck, Sprout, Compass, AlertTriangle, Layers, Award } from "lucide-react";
 
-export function WhyKH() {
+interface WhyKHProps {
+  asH1?: boolean;
+}
+
+export function WhyKH({ asH1 = false }: WhyKHProps) {
+  const HeadingTag = asH1 ? "h1" : "h2";
+
   return (
     <section id="why-kh" className="border-b border-border/60 bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-3xl">
           <span className="text-[11px] tracking-[0.3em] text-gold uppercase block mb-3">
-            Strategic Sourcing · Page 4
+            Strategic Sourcing · Overview
           </span>
-          <h2 className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <HeadingTag className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl font-normal">
             Why India, Why KH International
-          </h2>
+          </HeadingTag>
         </div>
 
         {/* 3 Core Pillars Grid */}

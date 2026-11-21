@@ -1,5 +1,6 @@
 import heroImg from "@/assets/optimized/hero-774-q85.webp";
-import { Award, Globe, Users, ShieldCheck, ArrowRight, FileCheck2, ExternalLink, FileText } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Award, Globe, Users, ShieldCheck, ArrowRight } from "lucide-react";
 
 interface HeroProps {
   onOpenSampleModal?: (type?: "sample" | "partner" | "gcms") => void;
@@ -56,13 +57,13 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
 
           {/* Primary Call to Action Buttons */}
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center justify-center gap-3 border border-gold bg-gold px-8 py-4 text-[12px] font-medium tracking-[0.2em] text-white uppercase transition-all duration-300 hover:bg-forest hover:border-forest shadow-md hover:shadow-xl"
             >
               <span>Request a Sample</span>
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
 

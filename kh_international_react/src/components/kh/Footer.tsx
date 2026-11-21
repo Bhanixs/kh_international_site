@@ -1,5 +1,6 @@
+import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
-import { Mail, Phone, MapPin, ShieldCheck } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
   return (
@@ -27,16 +28,16 @@ export function Footer() {
               Navigation
             </h4>
             <ul className="space-y-2.5 text-white/80">
-              <li><a href="#home" className="hover:text-gold transition-colors">Page 1 — Home</a></li>
-              <li><a href="#about" className="hover:text-gold transition-colors">Page 2 — Our Story</a></li>
-              <li><a href="#product" className="hover:text-gold transition-colors">Page 3 — Vetriver Oil</a></li>
-              <li><a href="#why-kh" className="hover:text-gold transition-colors">Page 4 — Why India</a></li>
-              <li><a href="#sustainability" className="hover:text-gold transition-colors">Page 5 — Sustainability</a></li>
-              <li><a href="#markets" className="hover:text-gold transition-colors">Page 6 — Global Trade (France)</a></li>
-              <li><a href="#quality" className="hover:text-gold transition-colors">Page 7 — Compliance Matrix</a></li>
-              <li><a href="/reports" className="text-gold font-semibold hover:underline flex items-center gap-1">Reports & Lab Files Portal</a></li>
-              <li><a href="#farmers" className="hover:text-gold transition-colors">Farmers (<span lang="ta">தமிழ்</span>)</a></li>
-              <li><a href="#contact" className="hover:text-gold transition-colors">Page 8 — Trade Inquiry</a></li>
+              <li><Link to="/" className="hover:text-gold transition-colors">Home</Link></li>
+              <li><Link to="/about-us" className="hover:text-gold transition-colors">About Us</Link></li>
+              <li><Link to="/vetiver-oil" className="hover:text-gold transition-colors">Vetriver Oil</Link></li>
+              <li><Link to="/why-kh" className="hover:text-gold transition-colors">Why India</Link></li>
+              <li><Link to="/sustainability" className="hover:text-gold transition-colors">Sustainability</Link></li>
+              <li><Link to="/global-trade" className="hover:text-gold transition-colors">Global Trade (France)</Link></li>
+              <li><Link to="/compliance" className="hover:text-gold transition-colors">Compliance Matrix</Link></li>
+              <li><Link to="/reports" className="text-gold font-semibold hover:underline flex items-center gap-1">Reports & Lab Files Portal</Link></li>
+              <li><Link to="/farmers" className="hover:text-gold transition-colors">Farmers (<span lang="ta">தமிழ்</span>)</Link></li>
+              <li><Link to="/contact" className="hover:text-gold transition-colors">Trade Inquiry</Link></li>
             </ul>
           </div>
 

@@ -2,17 +2,23 @@ import img from "@/assets/optimized/farmer-461-q80.webp";
 import { img1, img2, img3, img4, img5, img6 } from "@/assets/photo-card";
 import { Sprout, Palette } from "lucide-react";
 
-export function Sustainability() {
+interface SustainabilityProps {
+  asH1?: boolean;
+}
+
+export function Sustainability({ asH1 = false }: SustainabilityProps) {
+  const HeadingTag = asH1 ? "h1" : "h2";
+
   return (
     <section id="sustainability" className="border-b border-border/60 bg-alabaster py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-3xl">
           <span className="text-[11px] tracking-[0.3em] font-semibold text-gold uppercase block mb-2">
-            Social Impact & Regenerative Sourcing · Page 5
+            Social Impact & Regenerative Sourcing · Overview
           </span>
-          <h2 className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl font-normal">
+          <HeadingTag className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl font-normal">
             Sustainability & Farmer Partnerships
-          </h2>
+          </HeadingTag>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground font-light">
             Two distinct, countable livelihood programs in Tamil Nadu — providing direct traceability and audited ESG impact for global trade partners.
           </p>

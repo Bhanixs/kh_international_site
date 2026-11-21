@@ -106,17 +106,23 @@ const tiersData: Tier[] = [
   },
 ];
 
-export function Quality() {
+interface QualityProps {
+  asH1?: boolean;
+}
+
+export function Quality({ asH1 = false }: QualityProps) {
+  const HeadingTag = asH1 ? "h1" : "h2";
+
   return (
     <section id="quality" className="border-b border-border/60 bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-3xl">
           <span className="text-[11px] tracking-[0.3em] font-semibold text-gold uppercase block mb-2">
-            Compliance Framework · Page 7
+            Compliance Framework · Overview
           </span>
-          <h2 className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl font-normal">
+          <HeadingTag className="font-serif text-4xl leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl font-normal">
             Global Standards & Compliance
-          </h2>
+          </HeadingTag>
           <p className="mt-4 text-md leading-relaxed text-muted-foreground font-light">
             A European or international buyer's first real question isn't "is the oil good" — it's "can I legally and safely bring this into my market, and will it survive my own compliance review." This page answers that directly and specifically across four distinct requirement tiers.
           </p>
