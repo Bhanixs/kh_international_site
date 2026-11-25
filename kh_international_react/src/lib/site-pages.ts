@@ -1,6 +1,7 @@
 export interface SitePageItem {
   slug: string;
   path: string;
+  sectionId: string;
   navLabel: string;
   title: string;
   description: string;
@@ -9,10 +10,15 @@ export interface SitePageItem {
   relatedPaths: string[];
 }
 
+export const HOME_TITLE = "KH International — Premium Vetriver Oil for Fragrance & Beauty";
+export const HOME_DESCRIPTION =
+  "KH International supplies premium vetriver oil to B2B buyers — fragrance houses, perfume manufacturers, devotional and beauty brands across India, France, and global markets.";
+
 export const sitePages: SitePageItem[] = [
   {
     slug: "about-us",
     path: "/about-us",
+    sectionId: "about",
     navLabel: "About Us",
     title: "About KH International — Premium Vetriver Oil & Regenerative Sourcing",
     description:
@@ -23,6 +29,7 @@ export const sitePages: SitePageItem[] = [
   {
     slug: "vetiver-oil",
     path: "/vetiver-oil",
+    sectionId: "product",
     navLabel: "Vetriver Oil",
     title: "Premium Vetriver Oil (Chrysopogon zizanioides) — KH International",
     description:
@@ -33,6 +40,7 @@ export const sitePages: SitePageItem[] = [
   {
     slug: "why-kh",
     path: "/why-kh",
+    sectionId: "why-kh",
     navLabel: "Why KH",
     title: "Why India, Why KH International — Supply Security & Traceability",
     description:
@@ -43,6 +51,7 @@ export const sitePages: SitePageItem[] = [
   {
     slug: "sustainability",
     path: "/sustainability",
+    sectionId: "sustainability",
     navLabel: "Sustainability",
     title: "Sustainability & Farmer Partnerships — KH International",
     description:
@@ -53,6 +62,7 @@ export const sitePages: SitePageItem[] = [
   {
     slug: "global-trade",
     path: "/global-trade",
+    sectionId: "markets",
     navLabel: "Global Trade",
     title: "Global Trade & Export Partnerships — KH International",
     description:
@@ -63,6 +73,7 @@ export const sitePages: SitePageItem[] = [
   {
     slug: "compliance",
     path: "/compliance",
+    sectionId: "quality",
     navLabel: "Compliance",
     title: "Global Standards & Compliance Matrix — KH International",
     description:
@@ -73,6 +84,7 @@ export const sitePages: SitePageItem[] = [
   {
     slug: "farmers",
     path: "/farmers",
+    sectionId: "farmers",
     navLabel: "Farmers (தமிழ்)",
     isBadge: true,
     title: "விவசாயிகள் மற்றும் கைவினைஞர்கள் — KH International",
@@ -84,6 +96,7 @@ export const sitePages: SitePageItem[] = [
   {
     slug: "contact",
     path: "/contact",
+    sectionId: "contact",
     navLabel: "Trade Inquiry",
     title: "Contact & Commercial Trade Inquiry — KH International",
     description:
@@ -95,4 +108,32 @@ export const sitePages: SitePageItem[] = [
 
 export function findSitePage(path: string): SitePageItem | undefined {
   return sitePages.find((p) => p.path === path);
+}
+
+export function normalizePathname(pathname: string): string {
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    return pathname.slice(0, -1);
+  }
+  return pathname;
+}
+
+export function getSectionIdForPath(pathname: string): string | undefined {
+  const normalized = normalizePathname(pathname);
+  if (normalized === "/") return "home";
+  return findSitePage(normalized)?.sectionId;
+}
+
+export function buildPageHead(path: string, title = HOME_TITLE, description = HOME_DESCRIPTION) {
+  const url = `https://www.khinternational.org.in${path}`;
+  return {
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+    ],
+    links: [{ rel: "canonical", href: url }],
+  };
 }

@@ -1,8 +1,19 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { normalizePathname } from "@/lib/site-pages";
+import { scrollToSectionByPath } from "@/lib/section-scroll";
 
 export function Footer() {
+  const currentPath = normalizePathname(
+    useRouterState({ select: (state) => state.location.pathname }),
+  );
+
+  function handleSectionLinkClick(targetPath: string) {
+    if (currentPath === targetPath) {
+      scrollToSectionByPath(targetPath, "smooth");
+    }
+  }
   return (
     <footer className="bg-forest text-white border-t border-forest">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
@@ -28,16 +39,16 @@ export function Footer() {
               Navigation
             </h4>
             <ul className="space-y-2.5 text-white/80">
-              <li><Link to="/" className="hover:text-gold transition-colors">Home</Link></li>
-              <li><Link to="/about-us" className="hover:text-gold transition-colors">About Us</Link></li>
-              <li><Link to="/vetiver-oil" className="hover:text-gold transition-colors">Vetriver Oil</Link></li>
-              <li><Link to="/why-kh" className="hover:text-gold transition-colors">Why India</Link></li>
-              <li><Link to="/sustainability" className="hover:text-gold transition-colors">Sustainability</Link></li>
-              <li><Link to="/global-trade" className="hover:text-gold transition-colors">Global Trade (France)</Link></li>
-              <li><Link to="/compliance" className="hover:text-gold transition-colors">Compliance Matrix</Link></li>
+              <li><Link to="/" resetScroll={false} onClick={() => handleSectionLinkClick("/")} className="hover:text-gold transition-colors">Home</Link></li>
+              <li><Link to="/about-us" resetScroll={false} onClick={() => handleSectionLinkClick("/about-us")} className="hover:text-gold transition-colors">About Us</Link></li>
+              <li><Link to="/vetiver-oil" resetScroll={false} onClick={() => handleSectionLinkClick("/vetiver-oil")} className="hover:text-gold transition-colors">Vetriver Oil</Link></li>
+              <li><Link to="/why-kh" resetScroll={false} onClick={() => handleSectionLinkClick("/why-kh")} className="hover:text-gold transition-colors">Why India</Link></li>
+              <li><Link to="/sustainability" resetScroll={false} onClick={() => handleSectionLinkClick("/sustainability")} className="hover:text-gold transition-colors">Sustainability</Link></li>
+              <li><Link to="/global-trade" resetScroll={false} onClick={() => handleSectionLinkClick("/global-trade")} className="hover:text-gold transition-colors">Global Trade (France)</Link></li>
+              <li><Link to="/compliance" resetScroll={false} onClick={() => handleSectionLinkClick("/compliance")} className="hover:text-gold transition-colors">Compliance Matrix</Link></li>
               <li><Link to="/reports" className="text-gold font-semibold hover:underline flex items-center gap-1">Reports & Lab Files Portal</Link></li>
-              <li><Link to="/farmers" className="hover:text-gold transition-colors">Farmers (<span lang="ta">தமிழ்</span>)</Link></li>
-              <li><Link to="/contact" className="hover:text-gold transition-colors">Trade Inquiry</Link></li>
+              <li><Link to="/farmers" resetScroll={false} onClick={() => handleSectionLinkClick("/farmers")} className="hover:text-gold transition-colors">Farmers (<span lang="ta">தமிழ்</span>)</Link></li>
+              <li><Link to="/contact" resetScroll={false} onClick={() => handleSectionLinkClick("/contact")} className="hover:text-gold transition-colors">Trade Inquiry</Link></li>
             </ul>
           </div>
 

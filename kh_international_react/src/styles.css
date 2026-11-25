@@ -151,7 +151,10 @@
   }
 }
 
-#main-content > section:not(#home),
+#main-content > section {
+  scroll-margin-top: 5rem;
+}
+
 footer {
   content-visibility: auto;
   contain-intrinsic-size: auto 1800px;

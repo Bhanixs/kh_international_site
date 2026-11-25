@@ -2,6 +2,8 @@ import { useEffect, useRef, useState, type RefObject } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { Menu, X, ChevronRight } from "lucide-react";
+import { normalizePathname } from "@/lib/site-pages";
+import { scrollToSectionByPath } from "@/lib/section-scroll";
 
 interface NavProps {
   onOpenSampleModal?: (type?: "sample" | "partner" | "gcms") => void;
@@ -39,7 +41,14 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
   const toggleRef = menuButtonRef ?? localMenuButtonRef;
 
   const routerState = useRouterState();
-  const currentPath = routerState.location.pathname;
+  const currentPath = normalizePathname(routerState.location.pathname);
+
+  function handleSectionLinkClick(targetPath: string, closeMobile = false) {
+    if (closeMobile) setMobileOpen(false);
+    if (currentPath === targetPath) {
+      scrollToSectionByPath(targetPath, "smooth");
+    }
+  }
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -56,7 +65,12 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur-md transition-all">
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
         {/* Brand Logo & Title */}
-        <Link to="/" className="flex items-center gap-3 shrink-0 group">
+        <Link
+          to="/"
+          resetScroll={false}
+          onClick={() => handleSectionLinkClick("/")}
+          className="flex items-center gap-3 shrink-0 group"
+        >
           <Logo className="h-12 sm:h-14 w-auto transition-transform group-hover:scale-105" />
           <div className="flex flex-col">
             <span className="font-serif text-lg sm:text-xl tracking-tight text-foreground font-semibold leading-none">
@@ -76,6 +90,8 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
               <Link
                 key={l.to}
                 to={l.to}
+                resetScroll={false}
+                onClick={() => handleSectionLinkClick(l.to)}
                 className={`inline-flex items-center gap-1 border border-gold/40 px-2.5 py-1 rounded-full transition-all text-[10.5px] font-semibold ${
                   isActive
                     ? "bg-gold text-white"
@@ -88,6 +104,8 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
               <Link
                 key={l.to}
                 to={l.to}
+                resetScroll={false}
+                onClick={() => handleSectionLinkClick(l.to)}
                 className={`transition-colors py-1 border-b-2 whitespace-nowrap ${
                   isActive
                     ? "text-forest border-gold font-semibold"
@@ -138,7 +156,8 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
                 <Link
                   key={l.to}
                   to={l.to}
-                  onClick={() => setMobileOpen(false)}
+                  resetScroll={false}
+                  onClick={() => handleSectionLinkClick(l.to, true)}
                   className={`text-xs uppercase tracking-wider font-medium py-2 px-3 rounded-lg border transition-colors flex items-center justify-between ${
                     l.isBadge
                       ? isActive
@@ -159,7 +178,8 @@ export function Nav({ onOpenSampleModal, menuButtonRef }: NavProps) {
           <div className="pt-4 border-t border-border/60 flex flex-col sm:flex-row gap-3">
             <Link
               to="/contact"
-              onClick={() => setMobileOpen(false)}
+              resetScroll={false}
+              onClick={() => handleSectionLinkClick("/contact", true)}
               className="w-full text-center border border-gold bg-gold py-3 text-xs font-semibold uppercase tracking-widest text-white hover:bg-forest transition-colors shadow-sm"
             >
               Request Sample Vial (100g)

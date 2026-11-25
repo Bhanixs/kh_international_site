@@ -9,46 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutUsRouteImport } from './routes/about-us'
-import { Route as ComplianceRouteImport } from './routes/compliance'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as FarmersRouteImport } from './routes/farmers'
-import { Route as GlobalTradeRouteImport } from './routes/global-trade'
+import { Route as LandingRouteImport } from './routes/_landing'
 import { Route as ReportsRouteImport } from './routes/reports'
-import { Route as SustainabilityRouteImport } from './routes/sustainability'
-import { Route as VetiverOilRouteImport } from './routes/vetiver-oil'
-import { Route as WhyKhRouteImport } from './routes/why-kh'
+import { Route as LandingIndexRouteImport } from './routes/_landing/index'
+import { Route as LandingAboutUsRouteImport } from './routes/_landing/about-us'
+import { Route as LandingComplianceRouteImport } from './routes/_landing/compliance'
+import { Route as LandingContactRouteImport } from './routes/_landing/contact'
+import { Route as LandingFarmersRouteImport } from './routes/_landing/farmers'
+import { Route as LandingGlobalTradeRouteImport } from './routes/_landing/global-trade'
+import { Route as LandingSustainabilityRouteImport } from './routes/_landing/sustainability'
+import { Route as LandingVetiverOilRouteImport } from './routes/_landing/vetiver-oil'
+import { Route as LandingWhyKhRouteImport } from './routes/_landing/why-kh'
 import { Route as ApiEnquiryRouteImport } from './routes/api/enquiry'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutUsRoute = AboutUsRouteImport.update({
-  id: '/about-us',
-  path: '/about-us',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComplianceRoute = ComplianceRouteImport.update({
-  id: '/compliance',
-  path: '/compliance',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FarmersRoute = FarmersRouteImport.update({
-  id: '/farmers',
-  path: '/farmers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GlobalTradeRoute = GlobalTradeRouteImport.update({
-  id: '/global-trade',
-  path: '/global-trade',
+const LandingRoute = LandingRouteImport.update({
+  id: '/_landing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReportsRoute = ReportsRouteImport.update({
@@ -56,20 +31,50 @@ const ReportsRoute = ReportsRouteImport.update({
   path: '/reports',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SustainabilityRoute = SustainabilityRouteImport.update({
+const LandingIndexRoute = LandingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LandingRoute,
+} as any)
+const LandingAboutUsRoute = LandingAboutUsRouteImport.update({
+  id: '/about-us',
+  path: '/about-us',
+  getParentRoute: () => LandingRoute,
+} as any)
+const LandingComplianceRoute = LandingComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => LandingRoute,
+} as any)
+const LandingContactRoute = LandingContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => LandingRoute,
+} as any)
+const LandingFarmersRoute = LandingFarmersRouteImport.update({
+  id: '/farmers',
+  path: '/farmers',
+  getParentRoute: () => LandingRoute,
+} as any)
+const LandingGlobalTradeRoute = LandingGlobalTradeRouteImport.update({
+  id: '/global-trade',
+  path: '/global-trade',
+  getParentRoute: () => LandingRoute,
+} as any)
+const LandingSustainabilityRoute = LandingSustainabilityRouteImport.update({
   id: '/sustainability',
   path: '/sustainability',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LandingRoute,
 } as any)
-const VetiverOilRoute = VetiverOilRouteImport.update({
+const LandingVetiverOilRoute = LandingVetiverOilRouteImport.update({
   id: '/vetiver-oil',
   path: '/vetiver-oil',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LandingRoute,
 } as any)
-const WhyKhRoute = WhyKhRouteImport.update({
+const LandingWhyKhRoute = LandingWhyKhRouteImport.update({
   id: '/why-kh',
   path: '/why-kh',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LandingRoute,
 } as any)
 const ApiEnquiryRoute = ApiEnquiryRouteImport.update({
   id: '/api/enquiry',
@@ -78,143 +83,102 @@ const ApiEnquiryRoute = ApiEnquiryRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about-us': typeof AboutUsRoute
-  '/compliance': typeof ComplianceRoute
-  '/contact': typeof ContactRoute
-  '/farmers': typeof FarmersRoute
-  '/global-trade': typeof GlobalTradeRoute
+  '/': typeof LandingIndexRoute
   '/reports': typeof ReportsRoute
-  '/sustainability': typeof SustainabilityRoute
-  '/vetiver-oil': typeof VetiverOilRoute
-  '/why-kh': typeof WhyKhRoute
+  '/about-us': typeof LandingAboutUsRoute
+  '/compliance': typeof LandingComplianceRoute
+  '/contact': typeof LandingContactRoute
+  '/farmers': typeof LandingFarmersRoute
+  '/global-trade': typeof LandingGlobalTradeRoute
+  '/sustainability': typeof LandingSustainabilityRoute
+  '/vetiver-oil': typeof LandingVetiverOilRoute
+  '/why-kh': typeof LandingWhyKhRoute
   '/api/enquiry': typeof ApiEnquiryRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about-us': typeof AboutUsRoute
-  '/compliance': typeof ComplianceRoute
-  '/contact': typeof ContactRoute
-  '/farmers': typeof FarmersRoute
-  '/global-trade': typeof GlobalTradeRoute
   '/reports': typeof ReportsRoute
-  '/sustainability': typeof SustainabilityRoute
-  '/vetiver-oil': typeof VetiverOilRoute
-  '/why-kh': typeof WhyKhRoute
+  '/about-us': typeof LandingAboutUsRoute
+  '/compliance': typeof LandingComplianceRoute
+  '/contact': typeof LandingContactRoute
+  '/farmers': typeof LandingFarmersRoute
+  '/global-trade': typeof LandingGlobalTradeRoute
+  '/sustainability': typeof LandingSustainabilityRoute
+  '/vetiver-oil': typeof LandingVetiverOilRoute
+  '/why-kh': typeof LandingWhyKhRoute
   '/api/enquiry': typeof ApiEnquiryRoute
+  '/': typeof LandingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/about-us': typeof AboutUsRoute
-  '/compliance': typeof ComplianceRoute
-  '/contact': typeof ContactRoute
-  '/farmers': typeof FarmersRoute
-  '/global-trade': typeof GlobalTradeRoute
+  '/_landing': typeof LandingRouteWithChildren
   '/reports': typeof ReportsRoute
-  '/sustainability': typeof SustainabilityRoute
-  '/vetiver-oil': typeof VetiverOilRoute
-  '/why-kh': typeof WhyKhRoute
+  '/_landing/about-us': typeof LandingAboutUsRoute
+  '/_landing/compliance': typeof LandingComplianceRoute
+  '/_landing/contact': typeof LandingContactRoute
+  '/_landing/farmers': typeof LandingFarmersRoute
+  '/_landing/global-trade': typeof LandingGlobalTradeRoute
+  '/_landing/sustainability': typeof LandingSustainabilityRoute
+  '/_landing/vetiver-oil': typeof LandingVetiverOilRoute
+  '/_landing/why-kh': typeof LandingWhyKhRoute
   '/api/enquiry': typeof ApiEnquiryRoute
+  '/_landing/': typeof LandingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/reports'
     | '/about-us'
     | '/compliance'
     | '/contact'
     | '/farmers'
     | '/global-trade'
-    | '/reports'
     | '/sustainability'
     | '/vetiver-oil'
     | '/why-kh'
     | '/api/enquiry'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/reports'
     | '/about-us'
     | '/compliance'
     | '/contact'
     | '/farmers'
     | '/global-trade'
-    | '/reports'
     | '/sustainability'
     | '/vetiver-oil'
     | '/why-kh'
     | '/api/enquiry'
+    | '/'
   id:
     | '__root__'
-    | '/'
-    | '/about-us'
-    | '/compliance'
-    | '/contact'
-    | '/farmers'
-    | '/global-trade'
+    | '/_landing'
     | '/reports'
-    | '/sustainability'
-    | '/vetiver-oil'
-    | '/why-kh'
+    | '/_landing/about-us'
+    | '/_landing/compliance'
+    | '/_landing/contact'
+    | '/_landing/farmers'
+    | '/_landing/global-trade'
+    | '/_landing/sustainability'
+    | '/_landing/vetiver-oil'
+    | '/_landing/why-kh'
     | '/api/enquiry'
+    | '/_landing/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutUsRoute: typeof AboutUsRoute
-  ComplianceRoute: typeof ComplianceRoute
-  ContactRoute: typeof ContactRoute
-  FarmersRoute: typeof FarmersRoute
-  GlobalTradeRoute: typeof GlobalTradeRoute
+  LandingRoute: typeof LandingRouteWithChildren
   ReportsRoute: typeof ReportsRoute
-  SustainabilityRoute: typeof SustainabilityRoute
-  VetiverOilRoute: typeof VetiverOilRoute
-  WhyKhRoute: typeof WhyKhRoute
   ApiEnquiryRoute: typeof ApiEnquiryRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
+    '/_landing': {
+      id: '/_landing'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about-us': {
-      id: '/about-us'
-      path: '/about-us'
-      fullPath: '/about-us'
-      preLoaderRoute: typeof AboutUsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/compliance': {
-      id: '/compliance'
-      path: '/compliance'
-      fullPath: '/compliance'
-      preLoaderRoute: typeof ComplianceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/farmers': {
-      id: '/farmers'
-      path: '/farmers'
-      fullPath: '/farmers'
-      preLoaderRoute: typeof FarmersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/global-trade': {
-      id: '/global-trade'
-      path: '/global-trade'
-      fullPath: '/global-trade'
-      preLoaderRoute: typeof GlobalTradeRouteImport
+      preLoaderRoute: typeof LandingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reports': {
@@ -224,26 +188,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sustainability': {
-      id: '/sustainability'
+    '/_landing/': {
+      id: '/_landing/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof LandingIndexRouteImport
+      parentRoute: typeof LandingRoute
+    }
+    '/_landing/about-us': {
+      id: '/_landing/about-us'
+      path: '/about-us'
+      fullPath: '/about-us'
+      preLoaderRoute: typeof LandingAboutUsRouteImport
+      parentRoute: typeof LandingRoute
+    }
+    '/_landing/compliance': {
+      id: '/_landing/compliance'
+      path: '/compliance'
+      fullPath: '/compliance'
+      preLoaderRoute: typeof LandingComplianceRouteImport
+      parentRoute: typeof LandingRoute
+    }
+    '/_landing/contact': {
+      id: '/_landing/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof LandingContactRouteImport
+      parentRoute: typeof LandingRoute
+    }
+    '/_landing/farmers': {
+      id: '/_landing/farmers'
+      path: '/farmers'
+      fullPath: '/farmers'
+      preLoaderRoute: typeof LandingFarmersRouteImport
+      parentRoute: typeof LandingRoute
+    }
+    '/_landing/global-trade': {
+      id: '/_landing/global-trade'
+      path: '/global-trade'
+      fullPath: '/global-trade'
+      preLoaderRoute: typeof LandingGlobalTradeRouteImport
+      parentRoute: typeof LandingRoute
+    }
+    '/_landing/sustainability': {
+      id: '/_landing/sustainability'
       path: '/sustainability'
       fullPath: '/sustainability'
-      preLoaderRoute: typeof SustainabilityRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof LandingSustainabilityRouteImport
+      parentRoute: typeof LandingRoute
     }
-    '/vetiver-oil': {
-      id: '/vetiver-oil'
+    '/_landing/vetiver-oil': {
+      id: '/_landing/vetiver-oil'
       path: '/vetiver-oil'
       fullPath: '/vetiver-oil'
-      preLoaderRoute: typeof VetiverOilRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof LandingVetiverOilRouteImport
+      parentRoute: typeof LandingRoute
     }
-    '/why-kh': {
-      id: '/why-kh'
+    '/_landing/why-kh': {
+      id: '/_landing/why-kh'
       path: '/why-kh'
       fullPath: '/why-kh'
-      preLoaderRoute: typeof WhyKhRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof LandingWhyKhRouteImport
+      parentRoute: typeof LandingRoute
     }
     '/api/enquiry': {
       id: '/api/enquiry'
@@ -255,17 +261,36 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface LandingRouteChildren {
+  LandingAboutUsRoute: typeof LandingAboutUsRoute
+  LandingComplianceRoute: typeof LandingComplianceRoute
+  LandingContactRoute: typeof LandingContactRoute
+  LandingFarmersRoute: typeof LandingFarmersRoute
+  LandingGlobalTradeRoute: typeof LandingGlobalTradeRoute
+  LandingSustainabilityRoute: typeof LandingSustainabilityRoute
+  LandingVetiverOilRoute: typeof LandingVetiverOilRoute
+  LandingWhyKhRoute: typeof LandingWhyKhRoute
+  LandingIndexRoute: typeof LandingIndexRoute
+}
+
+const LandingRouteChildren: LandingRouteChildren = {
+  LandingAboutUsRoute: LandingAboutUsRoute,
+  LandingComplianceRoute: LandingComplianceRoute,
+  LandingContactRoute: LandingContactRoute,
+  LandingFarmersRoute: LandingFarmersRoute,
+  LandingGlobalTradeRoute: LandingGlobalTradeRoute,
+  LandingSustainabilityRoute: LandingSustainabilityRoute,
+  LandingVetiverOilRoute: LandingVetiverOilRoute,
+  LandingWhyKhRoute: LandingWhyKhRoute,
+  LandingIndexRoute: LandingIndexRoute,
+}
+
+const LandingRouteWithChildren =
+  LandingRoute._addFileChildren(LandingRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutUsRoute: AboutUsRoute,
-  ComplianceRoute: ComplianceRoute,
-  ContactRoute: ContactRoute,
-  FarmersRoute: FarmersRoute,
-  GlobalTradeRoute: GlobalTradeRoute,
+  LandingRoute: LandingRouteWithChildren,
   ReportsRoute: ReportsRoute,
-  SustainabilityRoute: SustainabilityRoute,
-  VetiverOilRoute: VetiverOilRoute,
-  WhyKhRoute: WhyKhRoute,
   ApiEnquiryRoute: ApiEnquiryRoute,
 }
 export const routeTree = rootRouteImport

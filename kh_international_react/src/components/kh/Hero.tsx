@@ -59,6 +59,7 @@ export function Hero({ onOpenSampleModal }: HeroProps) {
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
               to="/contact"
+              resetScroll={false}
               className="inline-flex items-center justify-center gap-3 border border-gold bg-gold px-8 py-4 text-[12px] font-medium tracking-[0.2em] text-white uppercase transition-all duration-300 hover:bg-forest hover:border-forest shadow-md hover:shadow-xl"
             >
               <span>Request a Sample</span>
